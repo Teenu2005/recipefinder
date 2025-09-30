@@ -1,5 +1,5 @@
 import React from 'react'
-
+import img1 from '../assets/'
 function Home() {
   return (
     <>
@@ -9,14 +9,7 @@ function Home() {
             <h5>Discover delicious recipes tailored to your taste, ingredients, and lifestyle</h5>
         </main>
         <div className="imgs">
-                <div className="imgrow">
-                <div className="img1"></div>
-                <div className="img1"></div>
-                </div>
-            <div className="imgrow">
-                <div className="img1"></div>
-                <div className="img1"></div>
-            </div>
+               <img src={} alt="" />
         </div>
         </div>
     </>

@@ -1,3 +1,10 @@
+*{
+    box-sizing: border-box;
+    scrollbar-width:thin;
+}
+#nav{
+    background: #cbf3cd66;  
+}
 .navbar-collapse {
     flex-grow: 0;
 }
@@ -22,6 +29,9 @@
     width: 100%;
     height: 100%;
     justify-content:space-between;
+    /* background: #4caf4f9d; */
+    background: linear-gradient(0deg,rgba(34, 192, 195, 0.399) 0%, rgba(76, 175, 79, 0.445) 100%);
+    color: #091d02;
 }
 .mainpage main{
     margin: 10% 0 0 5%;
@@ -33,7 +43,33 @@
 }
 /*Type page */
 .catmain{
-    background: #000;
-    width: 99vw;
+    width: 98vw;
     height: 100vh;
+    background: #22C1C3;
+    background: linear-gradient(0deg,rgba(34, 193, 195, 1) 0%, rgba(76, 175, 80, 1) 100%);
+}
+/* card */
+.card{
+    background: #fff;
+    cursor: pointer;
+}
+.card:hover{
+    box-shadow: 1em 1em 1em .5em rgba(0, 0, 0, 0.303);
+}
+
+
+
+
+/* icon */
+.likebut{
+    all: unset;
+}
+.likebut span{
+    border-radius: 50%;
+    position: absolute;
+    right: 5%;
+    top: 5%;
+}
+.likebut span {
+    fill: #0d9fd0;
 }

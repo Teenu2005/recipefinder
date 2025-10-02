@@ -6,7 +6,6 @@ function Display() {
   const [page, setPage] = useState(1);   // current page state
   const totalCard = 10;
   const cat = 'Seafood';
-
   useEffect(() => {
     getapi();
   }, []);
@@ -43,30 +42,30 @@ function Display() {
       </Row>
 
       {/* Pagination Buttons */}
-      <div className="pageno mt-3 d-flex justify-content-center gap-2">
-        <Button 
+      <div className="pageno ">
+        <button 
           onClick={() => setPage(prev => (prev > 1 ? prev - 1 : prev))}
-          disabled={page === 1}
+          style={page==1?{ display: 'none'}:null}
         >
-          Prev
-        </Button>
+          &larr; Prev
+        </button>
 
         {arr.map((num) => (
-          <Button 
+          <button 
             key={num} 
             className={num === page ? "selected" : "notselected"}
             onClick={() => setPage(num)}
           >
             {num}
-          </Button>
+          </button>
         ))}
 
-        <Button 
+        <button 
           onClick={() => setPage(prev => (prev < arr.length ? prev + 1 : prev))}
-          disabled={page === arr.length}
+          style={page==arr.length?{ display: 'none'}:null}
         >
-          Next
-        </Button>
+          &rarr; Next
+        </button>
       </div>
     </Container>
   );

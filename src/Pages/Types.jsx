@@ -20,16 +20,18 @@ function Types() {
       console.log(err)
     }
   }
+
+
   return (
     <>
     <Container fluid className='catmain'>
-      <Row md={4}>
+      <Row md={4} lg={5}>
         {categories.map(
           (value,index)=>{
              return <Col  key={index}>
-                <Card>
-                  <Card.Img src={value.strCategoryThumb} />
-                  <Card.Header>{value.strCategory}</Card.Header>
+                <Card id={index}  >
+                  <Card.Img id={index} src={value.strCategoryThumb} />
+                  <Card.Header id={index}>{value.strCategory}</Card.Header>
                 </Card>
               </Col>
           }

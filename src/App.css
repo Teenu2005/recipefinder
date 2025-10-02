@@ -4,7 +4,7 @@
     --btn-bg:  #0d9fd0; 
     --btn-hv-bg:  #0b6d8d; 
     --btn-bg-hover:  #1784a9; 
-    --btn-bg-selected: #05bcf9;
+    --btn-bg-selected: #0b4052;
     --bg-grad:linear-gradient(0deg,rgba(45, 207, 129, 0.516) 0%, rgba(40, 212, 34, 0.543) 100%);
 }
 
@@ -93,19 +93,36 @@ nav{
 /* Dsiplay */
 .itemcard img:hover{
     filter:none;
+    transform: scale(1);
+}
+.itemcard img{
+    box-shadow: 1em -1em black inset;
 }
 .itemcard .card-text{
-    
+    background: gray;
+    font-weight: 600;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    border-radius: 0 0 1em 1em;
+    width: 100%;
+    padding: .3em;
 }
-
 .pageno{
     display: flex;
-    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    bottom: 1%;
 }
 .pageno button{
-    background: var(--btn-bg-hover);
-    margin-inline: 5px;
+    padding: .5em;
+    border: none;
+    border-radius: 1em;
 }
 .selected{
-    background: var(--btn-bg-selected);
+    background: var(--btn-bg-selected) !important;
+    color: white;
+}
+button:disabled{
+    color: gray;
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Nav,Button,Container,Form,NavbarToggle, Navbar,NavbarBrand, NavbarCollapse} from 'react-bootstrap'
+import {Nav,Button,Container,Form,NavDropdown, Navbar,NavbarBrand, NavbarCollapse} from 'react-bootstrap'
 function RecipeNav() {
   return (
     <>
@@ -13,8 +13,10 @@ function RecipeNav() {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link href="#action1">Home</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="#action2">Categories</Nav.Link>
             <Nav.Link href="#action2">About</Nav.Link>
+           
           </Nav>
           <Form className="d-flex">
             <Form.Control

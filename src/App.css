@@ -1,9 +1,11 @@
 :root {
     --head-color:rgb(3, 35, 19);
     --nav-bg:rgba(160, 235, 157, 0.717);
-  --btn-bg:  #0d9fd0; 
-  --btn-bg-hover:  #1784a9; 
-  --bg-grad:linear-gradient(0deg,rgba(45, 207, 129, 0.516) 0%, rgba(40, 212, 34, 0.543) 100%);
+    --btn-bg:  #0d9fd0; 
+    --btn-hv-bg:  #0b6d8d; 
+    --btn-bg-hover:  #1784a9; 
+    --btn-bg-selected: #05bcf9;
+    --bg-grad:linear-gradient(0deg,rgba(45, 207, 129, 0.516) 0%, rgba(40, 212, 34, 0.543) 100%);
 }
 
 
@@ -34,6 +36,7 @@ nav{
     background: rgba(159, 168, 156, 0.436);
     border-radius: 1em;
     z-index: 1;
+    min-height: 90%;
     margin-block: .5em !important;
 }
 .card-header{
@@ -45,10 +48,11 @@ nav{
     cursor: pointer !important;
     /* box-shadow: 2px 2px 2px 0 black; */
 }
-
+.card img{
+    border-radius: 1em;
+}
 .card img:hover{
     filter: drop-shadow(4px 4px 10px black);
-    border-radius: 1em;
     transform: scale(1.01);
 }
 
@@ -69,7 +73,7 @@ nav{
     display: flex;
     width: 100%;
     max-height: 100%;
-    min-height: 100vh;
+    max-width: 100%;
     justify-content:space-between;
 }
 .mainpage main{
@@ -84,4 +88,24 @@ nav{
     position: absolute;
     bottom: 0;
     right: 0;
+}
+
+/* Dsiplay */
+.itemcard img:hover{
+    filter:none;
+}
+.itemcard .card-text{
+    
+}
+
+.pageno{
+    display: flex;
+    align-items: center;
+}
+.pageno button{
+    background: var(--btn-bg-hover);
+    margin-inline: 5px;
+}
+.selected{
+    background: var(--btn-bg-selected);
 }

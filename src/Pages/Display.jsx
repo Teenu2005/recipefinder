@@ -1,0 +1,75 @@
+import React, { useState, useEffect } from 'react';
+import { Col, Row, Card, Container, Button } from 'react-bootstrap';
+
+function Display() {
+  const [items, setItems] = useState([]);
+  const [page, setPage] = useState(1);   // current page state
+  const totalCard = 10;
+  const cat = 'Seafood';
+
+  useEffect(() => {
+    getapi();
+  }, []);
+
+  async function getapi() {
+    try {
+      await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${cat}`)
+        .then(res => res.json())
+        .then(data => setItems(data.meals));
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  // Pagination calculations
+  let startIndex = (page - 1) * totalCard;
+  let endIndex = startIndex + totalCard;
+  let current = items.slice(startIndex, endIndex);
+
+  // Total pages array
+  const arr = Array.from({ length: Math.ceil(items.length / totalCard) }, (_, i) => i + 1);
+
+  return (
+    <Container fluid className="catmain">
+      <Row md={3} lg={5}>
+        {current.map((value, index) => (
+          <Col sm={2} key={index}>
+            <Card className="itemcard">
+              <Card.Img src={value.strMealThumb} />
+              <Card.Text>{value.strMeal}</Card.Text>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+
+      {/* Pagination Buttons */}
+      <div className="pageno mt-3 d-flex justify-content-center gap-2">
+        <Button 
+          onClick={() => setPage(prev => (prev > 1 ? prev - 1 : prev))}
+          disabled={page === 1}
+        >
+          Prev
+        </Button>
+
+        {arr.map((num) => (
+          <Button 
+            key={num} 
+            className={num === page ? "selected" : "notselected"}
+            onClick={() => setPage(num)}
+          >
+            {num}
+          </Button>
+        ))}
+
+        <Button 
+          onClick={() => setPage(prev => (prev < arr.length ? prev + 1 : prev))}
+          disabled={page === arr.length}
+        >
+          Next
+        </Button>
+      </div>
+    </Container>
+  );
+}
+
+export default Display;

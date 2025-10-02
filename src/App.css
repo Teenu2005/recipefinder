@@ -1,0 +1,39 @@
+.navbar-collapse {
+    flex-grow: 0;
+}
+.btnSearch{
+    background: #0d9fd0;
+    border: none;
+}
+.btnSearch:hover{
+    background: #1784a9;
+}
+.heading{
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight:bold ;
+}
+.heading h5{
+    font-family: "Merriweather", serif;
+  font-optical-sizing: auto;
+}
+.mainpage{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content:space-between;
+}
+.mainpage main{
+    margin: 10% 0 0 5%;
+}
+.imgs{
+    background: #ebbcbc;
+    width:60%;
+    height: 94.1vh;
+}
+/*Type page */
+.catmain{
+    background: #000;
+    width: 99vw;
+    height: 100vh;
+}

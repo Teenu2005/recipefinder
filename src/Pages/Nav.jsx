@@ -3,7 +3,7 @@ import {Nav,Button,Container,Form,NavbarToggle, Navbar,NavbarBrand, NavbarCollap
 function RecipeNav() {
   return (
     <>
-       <Navbar expand="lg" className="bg-body-tertiary">
+       <Navbar expand="lg" >
       <Container fluid>
         <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />

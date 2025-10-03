@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import './App.css'
+import './DarkTheam.css'
+// import './App.css'
 import Nav from './Pages/Nav'
 import Home from './Pages/Home'
 import Types from './Pages/Types'
@@ -11,16 +12,17 @@ function App() {
 
   return (
     <>
-      <Nav />
        <BrowserRouter>
+    <div data-theme='dark'>
+      <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/categories" element={<Types />} />
         <Route path="/items/:id" element={<Display />} />
         <Route path="/item/:id" element={<Detail />} />
       </Routes>
+</div>
     </BrowserRouter>
-
     </>
   )
 }

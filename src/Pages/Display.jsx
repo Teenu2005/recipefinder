@@ -7,7 +7,7 @@ function Display() {
   const [page, setPage] = useState(1);
   const nav = useNavigate();
   const totalCard = 10;
-  const cat = useParams();
+  const cat = useParams() || "";
   console.log(cat)
   useEffect(() => {
     getapi();
@@ -37,6 +37,7 @@ function Display() {
 
   return (
     <Container fluid className="catmain">
+      <h3>{cat.id}</h3>
       <Row md={3} lg={5}>
         {current.map((value, index) => (
           <Col sm={2} key={index}>

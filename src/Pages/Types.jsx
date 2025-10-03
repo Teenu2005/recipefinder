@@ -29,10 +29,11 @@ function Types() {
   return (
     <>
     <Container fluid className='catmain'>
-      <Row md={4} lg={5}>
+      <h3>Top Categories</h3>
+      <Row md={3} lg={5}>
         {categories.map(
           (value,index)=>{
-             return <Col  key={index}>
+             return <Col sm md={3} key={index}>
                 <Card id={index} onClick={getitems} >
                   <Card.Img id={index} src={value.strCategoryThumb} />
                   <Card.Header id={index}>{value.strCategory}</Card.Header>

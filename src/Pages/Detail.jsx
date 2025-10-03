@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { ListGroup, Badge } from "react-bootstrap";
+import { ListGroup, Badge, Container} from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
 export default function Detail() {
   const [item, setItem] = useState({});
   const { id } = useParams();
-
+console.log(item)
   useEffect(() => {
     getapi();
   }, []);
@@ -30,30 +30,25 @@ export default function Detail() {
       ingredients.push(`${measure}:${ingredient}`);
     }
   }
-console.log(item)
+  console.log(item)
+  let vare = item.strYoutube||''
+  let newone = vare.split('/')
   return (
     <>
-    <h3>{item.strMeal}</h3>
-    <p>{item.strInstructions}</p>
-    <iframe src={item.strYoutube}></iframe>
-    <img src={item.strMealThumb} alt="Dish Img" />
-    <ListGroup as="ol" numbered>
-      {ingredients.map((val, index) => {
-        let vals = val.split(':')
-        return <ListGroup.Item
-          as="li"
-          key={index}
-          className="d-flex align-items-start"
-        >
-          <div className="ms-2 me-auto">
-            <div className="fw-bold">{vals[1]}</div>
-          </div>
-          <Badge pill>
-            {vals[0]}
-          </Badge>
-        </ListGroup.Item>
-})}
-    </ListGroup>
+      <Container fluid>
+        <h3>{item.strMeal}</h3>
+        <img src={item.strMealThumb} alt="Dish Img" />
+        <p>{item.strInstructions}</p>
+        <ol>
+        {ingredients.map(
+          (val,index)=>{
+            let ing =val.split(':')
+            return<li key={index}>{ing[0]}</li>
+          }
+        )}</ol>
+      </Container>
     </>
   );
 }
+
+{/* <iframe src={`${newone[0]}//${newone[2]}/embed/${newone[3]}`}></iframe> */}

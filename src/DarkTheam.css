@@ -93,6 +93,7 @@ main h5{
 /* Display */
 h3{
     font-family: var(--font-head);
+    font-weight: 900;
 }
 .itemcard{
     background: transparent;
@@ -103,22 +104,36 @@ h3{
     overflow: hidden;
     font-family: var(--font-nav);
     font-weight: 60px;
+      position: relative;
+  display: inline-block;
+  overflow: hidden;
 }
 .itemcard img{
     top: 0 !important;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
 }
-.itemcard:hover{
-}
-.itemcard img:hover{
-    transform: scale(1);
+
+.itemcard img:hover {
     filter: drop-shadow(0 0 black);
-    box-shadow: inset  0 0 10px white !important;
 }
+/* black hover effect */
+/* .itemcard:hover::after{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.445); 
+} */
 .itemcard .card-text{
     margin: .5em;
     height: 1em;
     position: absolute;
     bottom: 0;
+    color: #23412ae8;
+    z-index: 10;
+    font-weight: 600;
+    font-size: large;
+    z-index: 100;
 }
 /* pagination css */
 .pageno{
@@ -130,8 +145,20 @@ h3{
     border: none;
 }
 .selected{
+
     color: white;
 }
 button:disabled{
     color: gray;
+}
+
+/* Detail */
+[alt="Dish Img"]{
+    width: 60%;
+    height: 60%;
+    margin: 0 10%;
+}
+[alt="Dish Img"] + p{
+    font-family: var(--font-sub-head);
+    font-size: larger;
 }

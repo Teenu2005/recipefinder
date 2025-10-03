@@ -38,7 +38,7 @@ function Display() {
   return (
     <Container fluid className="catmain">
       <h3>{cat.id}</h3>
-      <Row md={3} lg={5}>
+      <Row md={3} lg={4}>
         {current.map((value, index) => (
           <Col sm={2} key={index}>
             <Card className="itemcard" id={index} onClick={getitems}>

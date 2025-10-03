@@ -4,16 +4,23 @@ import Nav from './Pages/Nav'
 import Home from './Pages/Home'
 import Types from './Pages/Types'
 import Display from './Pages/Display'
-
+import { Route,Routes,BrowserRouter } from 'react-router-dom'
+import Detail from './Pages/Detail'
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
       <Nav />
-      <Home />
-      <Types />
-      <Display />
+       <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/categories" element={<Types />} />
+        <Route path="/items/:id" element={<Display />} />
+        <Route path="/item/:id" element={<Detail />} />
+      </Routes>
+    </BrowserRouter>
+
     </>
   )
 }

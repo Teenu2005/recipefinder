@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Col, Row, Card, Container, Button } from 'react-bootstrap';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function Display() {
   const [items, setItems] = useState([]);
-  const [page, setPage] = useState(1);   // current page state
+  const [page, setPage] = useState(1);
+  const nav = useNavigate();
   const totalCard = 10;
-  const cat = 'Seafood';
+  const cat = useParams();
+  console.log(cat)
   useEffect(() => {
     getapi();
   }, []);
 
   async function getapi() {
     try {
-      await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${cat}`)
+      await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${cat.id}`)
         .then(res => res.json())
         .then(data => setItems(data.meals));
     } catch (err) {
@@ -28,14 +31,18 @@ function Display() {
   // Total pages array
   const arr = Array.from({ length: Math.ceil(items.length / totalCard) }, (_, i) => i + 1);
 
+ function getitems(e){
+    nav(`/item/${items[e.target.id].idMeal}`)
+ }
+
   return (
     <Container fluid className="catmain">
       <Row md={3} lg={5}>
         {current.map((value, index) => (
           <Col sm={2} key={index}>
-            <Card className="itemcard">
-              <Card.Img src={value.strMealThumb} />
-              <Card.Text>{value.strMeal}</Card.Text>
+            <Card className="itemcard" id={index} onClick={getitems}>
+              <Card.Img id={index} src={value.strMealThumb} />
+              <Card.Text id={index}>{value.strMeal}</Card.Text>
             </Card>
           </Col>
         ))}

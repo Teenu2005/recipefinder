@@ -1,8 +1,10 @@
 import {React, useState,useEffect} from 'react'
 import { Col,Row,Card,Container } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 function Types() {
   const [categories,setCategories] = useState([]);
+  const nav = useNavigate();
   useEffect(
     ()=>{getapi()}
     ,[]
@@ -20,7 +22,9 @@ function Types() {
       console.log(err)
     }
   }
-
+ function getitems(e){
+    nav(`/items/${categories[e.target.id].strCategory}`)
+ }
 
   return (
     <>
@@ -29,7 +33,7 @@ function Types() {
         {categories.map(
           (value,index)=>{
              return <Col  key={index}>
-                <Card id={index}  >
+                <Card id={index} onClick={getitems} >
                   <Card.Img id={index} src={value.strCategoryThumb} />
                   <Card.Header id={index}>{value.strCategory}</Card.Header>
                 </Card>

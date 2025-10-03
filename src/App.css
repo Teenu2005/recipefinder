@@ -7,7 +7,11 @@
     --btn-bg-selected: #0b4052;
     --bg-grad:linear-gradient(0deg,rgba(45, 207, 129, 0.516) 0%, rgba(40, 212, 34, 0.543) 100%);
 }
-
+#root{
+    background: var(--bg-grad);
+    max-height: 100%;
+    min-height: 100vh;
+}
 
 nav{
     background: var(--nav-bg) !important;
@@ -29,8 +33,6 @@ nav{
 .catmain{
     background: var(--bg-grad);
     padding-top: 2%;
-    max-height: 100%;
-    min-height: 100vh;
 }
 .card{
     background: rgba(159, 168, 156, 0.436);
@@ -59,7 +61,18 @@ nav{
 
 
 /* home  section*/
-.heading{
+main{
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight:bold ;
+}
+#homeimg{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+}
+/* .heading{
     font-family: "Playfair Display", serif;
     font-optical-sizing: auto;
     font-weight:bold ;
@@ -68,14 +81,7 @@ nav{
     font-family: "Merriweather", serif;
   font-optical-sizing: auto;
 }
-.mainpage{
-    background: var(--bg-grad);
-    display: flex;
-    width: 100%;
-    max-height: 100%;
-    max-width: 100%;
-    justify-content:space-between;
-}
+
 .mainpage main{
     margin: 10% 0 0 5%;
 }
@@ -88,7 +94,7 @@ nav{
     position: absolute;
     bottom: 0;
     right: 0;
-}
+} */
 
 /* Dsiplay */
 .itemcard img:hover{

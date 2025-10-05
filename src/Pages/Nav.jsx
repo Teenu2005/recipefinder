@@ -1,11 +1,31 @@
-import React, { useState } from 'react'
-import {Nav,Button,Container,Form,NavDropdown, Navbar,NavbarBrand, NavbarCollapse} from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import {Nav,Button,Container,Form,Modal, Navbar, Card} from 'react-bootstrap'
 function RecipeNav() {
-  const [inp,setInp] = useState();
-  const [country, setCountry] = useState([]);
+  const [showSearch,setShowSearch] = useState(false);
+  const [searchValue,setSearchValue] = useState('');
+  const [itemList,setItemList] = useState([]);
+  const [filtered,setFiltered] = useState([]);
+  useEffect(() => {
+      getapi();
+    }, []);
   
+    async function getapi() {
+      try {
+        await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=`)
+          .then(res => res.json())
+          .then(data => setItemList(data.meals));
+      } catch (err) {
+        console.log(err);
+      }
+    }
   function search(e){
-    setInp(e.traget.value);
+    setSearchValue(e.target.value);
+    let first = itemList.filter(
+      (item)=>{
+       return item.strMeal.toLowerCase().includes(searchValue.toLowerCase())
+      }
+    )
+    setFiltered(first.slice(0,10))
   }
   return (
     <>
@@ -25,19 +45,38 @@ function RecipeNav() {
            
           </Nav>
           <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-              onChange={search}
-              value={inp}
-            />
-            <Button className='btnSearch'>Search</Button>
+            <Button onClick={()=>setShowSearch(true)} id='searchbutton'><span className="material-symbols-outlined">search</span>Search</Button>
           </Form>
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    {showSearch?    <Modal
+      show = {showSearch}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header>
+        <Button id='closesearch' onClick={()=>setShowSearch(false)}><span class="material-symbols-outlined">
+stat_minus_2
+</span></Button>
+        <input id='search' onChange={search} value={searchValue} placeholder='Search'/>
+      </Modal.Header>
+      <Modal.Body>
+        <div className="searchcont">
+          <div className="row">
+       {filtered.map((value, index) => (
+        <div className="col-sm-3">
+            <Card className="itemcard" id={index}>
+              <Card.Img id={index} src={value.strMealThumb} />
+              <Card.Text id={index}>{value.strMeal}</Card.Text>
+            </Card>
+            </div>
+        ))}
+        </div>
+        </div>
+      </Modal.Body>
+    </Modal>:null}
     </>
   )
 }

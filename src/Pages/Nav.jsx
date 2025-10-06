@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import {Nav,Button,Container,Form,Modal, Navbar, Card} from 'react-bootstrap'
-function RecipeNav() {
+import { FaSearch } from "react-icons/fa";
+import { MdSunny } from "react-icons/md";
+import { CiCircleChevDown } from "react-icons/ci";
+import { FaMoon } from "react-icons/fa6";
+function RecipeNav(props) {
+  let them=props.them;
   const [showSearch,setShowSearch] = useState(false);
   const [searchValue,setSearchValue] = useState('');
   const [itemList,setItemList] = useState([]);
@@ -45,8 +50,9 @@ function RecipeNav() {
            
           </Nav>
           <Form className="d-flex">
-            <Button onClick={()=>setShowSearch(true)} id='searchbutton'><span className="material-symbols-outlined">search</span>Search</Button>
+            <Button onClick={()=>setShowSearch(true)} id='searchbutton'><FaSearch  />Search</Button>
           </Form>
+          <div className="them">{them?<MdSunny />:<FaMoon />}</div>
         </Navbar.Collapse>
       </Container>
     </Navbar>
@@ -57,9 +63,7 @@ function RecipeNav() {
       centered
     >
       <Modal.Header>
-        <Button id='closesearch' onClick={()=>setShowSearch(false)}><span class="material-symbols-outlined">
-stat_minus_2
-</span></Button>
+        <Button id='closesearch' onClick={()=>setShowSearch(false)}><CiCircleChevDown /></Button>
         <input id='search' onChange={search} value={searchValue} placeholder='Search'/>
       </Modal.Header>
       <Modal.Body>

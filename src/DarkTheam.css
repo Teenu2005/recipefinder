@@ -1,5 +1,6 @@
 body.light {
-    --bg-gradient:linear-gradient(0deg,rgba(9, 238, 246, 0.616) 0%, rgba(6, 249, 123, 0.566) 100%);
+    --bg-gradient:linear-gradient(0deg,rgba(9, 238, 246, 0.37) 0%, rgba(6, 249, 123, 0.566) 100%);
+    --bg-gradient-cat:rgba(237, 237, 245, 0.747);
     --bg-color:#09EDF6;
     --txt-color:#05321b;
     --sec-txt-color:#290707;
@@ -8,17 +9,19 @@ body.light {
     --btn-bg:#19ae61;
     --btn-bg-hover:#156e44;
     --card-bg:#59c0ab4a;
-    --font-head:"Playfair Display", serif;
+    --font-head:"Playfair Display", sans-serif;
     --font-sub-head:"PT Serif", serif;
     --font-nav:"Anaheim", sans-serif;
     --light:white;
     --light-g:gray;
     --nav-color:black;
+    --card-header:rgb(0, 0, 0);
+    --head-txt-color:black;
 }
 body.dark {
     --bg-gradient:linear-gradient(0deg,rgba(1, 19, 20, 0.961) 0%, rgba(2, 35, 18, 0.916) 100%);
     --bg-color:#062020;
-    --txt-color:#19ed80c8;
+    --txt-color:#eaf6eff8;
     --sec-txt-color:#0de8d9fe;
     --third-txt-color:#81ca92c9;
     --nav-bg:#1d3c2dfa;
@@ -33,11 +36,12 @@ body.dark {
     --nav-color:white !important;
 }
 #root{
-    background: var(--bg-color);
-    background: var(--bg-gradient);
     color: var(--txt-color);
     max-height: 100%;
     min-height: 100vh;
+}
+h3{
+    color:var(--head-txt-color);
 }
 /* Nav */
 nav{
@@ -77,6 +81,11 @@ button:hover{
     min-width:9em;
     color: var(--light-g);
     max-width: 100%;
+    padding: .2em 3em .2em 0 ;
+}
+#searchbutton:hover{
+    cursor: text;
+    
 }
 #closesearch{
     position:fixed;
@@ -110,6 +119,11 @@ button:hover{
 }
 
 /* Home Page */
+#home{
+    min-height: 89.2vh;
+    max-height: 100%;
+    background:var(--bg-gradient);
+}
 main{
     font-family: var(--font-head);
     font-optical-sizing: auto;
@@ -126,8 +140,10 @@ main h5{
     right: 0;
 }
 /* Catogarie */
+
 .catmain{
     padding-top:2%;
+    background: var(--bg-gradient-cat);
 }
 .card{
     min-width:80%;
@@ -135,14 +151,17 @@ main h5{
     margin-block: 10px;
     background:var(--card-bg);
     border-radius: 1em;
-    aspect-ratio: 3/3.4;
+    aspect-ratio: 3/3;
+}
+.card:hover{
+    box-shadow: 1px 1px 10px black;
 }
 .card .card-header{
     border-radius: 1em;
     position: absolute;
     bottom: 0;
     width: 100%;
-    color: var(--sec-txt-color);
+    color: var(--card-header);
     font-weight: 600;
     font-family: var(--font-sub-head);
     font-size: large;
@@ -171,7 +190,7 @@ h3{
 .itemcard{
     background: transparent;
     border: none;
-    color: var(--txt-color);
+    color: var(--card-header);
     margin-block: 1em;
     font-size: medium;
     overflow: hidden;
@@ -184,11 +203,15 @@ h3{
 .itemcard img{
     top: 0 !important;
     width: 100%;
+    height: 90%;
     transition: all 0.3s ease-in-out;
 }
 
 .itemcard img:hover {
     filter: drop-shadow(0 0 black);
+}
+.itemcard:hover {
+    box-shadow: none;
 }
 /* black hover effect */
 /* .itemcard:hover::after{
@@ -198,11 +221,11 @@ h3{
     background: rgba(0, 0, 0, 0.445); 
 } */
 .itemcard .card-text{
-    margin: .5em;
+    margin:1em 1em .4em .5em;
     height: 1em;
     position: absolute;
     bottom: 0;
-    color: var(--third-txt-color);
+    color:var(--card-header);
     z-index: 10;
     font-weight: 600;
     font-size: large;
@@ -218,7 +241,11 @@ h3{
     border: none;
 }
 .selected{
-
+    border-radius: 100% !important;
+    margin-inline: .4em;
+    transform: scale(1.21);
+    transition: all 0.2s ease-in-out;
+    background: var(--bg-gradient);
     color: var(--light);
 }
 button:disabled{
@@ -234,4 +261,14 @@ button:disabled{
 [alt="Dish Img"] + p{
     font-family: var(--font-sub-head);
     font-size: larger;
+}
+svg{
+    display: inline;
+    margin:5px 10px 5px 0px;
+}
+.them{
+    margin: .5em;
+}
+.them svg{
+    margin: .5em;
 }

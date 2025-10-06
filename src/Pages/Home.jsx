@@ -5,7 +5,7 @@ import Types from './Types'
 function Home() {
   return (
     <>
-    <div className='container-fluid'>
+    <div id='home' className='container-fluid'>
     <div className='mainpage row'>
         <main className='heading col-sm-7 p-5'> 
             <h1>Find the Perfect Recipe for Every Mood!</h1>

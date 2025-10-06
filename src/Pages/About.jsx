@@ -2,7 +2,7 @@ import React from 'react'
 import img from '../assets/cookimg.png'
 export default function About() {
   return (
-    <div className='container-fluid'>
+    <div id='home' className='container-fluid'>
     <div className='mainpage row'>
         <main className='heading col-sm-7 p-5'> 
             <h1>Hi I'm Teenu Anand</h1>

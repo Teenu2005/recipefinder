@@ -1,7 +1,10 @@
 import React from 'react'
 import img from '../assets/cookimg.png'
+import About from './About'
+import Types from './Types'
 function Home() {
   return (
+    <>
     <div className='container-fluid'>
     <div className='mainpage row'>
         <main className='heading col-sm-7 p-5'> 
@@ -15,6 +18,7 @@ function Home() {
         </div>
         </div>
     </div>
+    </>
   )
 }
 

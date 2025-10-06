@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import './DarkTheam.css'
 // import './App.css'
 import Nav from './Pages/Nav'
@@ -10,11 +10,15 @@ import Detail from './Pages/Detail'
 import About from './Pages/About'
 function App() {
   const [count, setCount] = useState(0)
+    const [dark, setDark] = useState(false);
 
+  useEffect(() => {
+    document.body.className = dark ? "dark" : "light";
+  }, [dark]);
   return (
     <>
        <BrowserRouter>
-    <div data-theme='dark'>
+    <div data-theme='dark' id='dark'>
       <Nav />
       <Routes>
         <Route path="/" element={<><Home /></>} />

@@ -35,7 +35,7 @@ console.log(item)
   let newone = vare.split('/')
   return (
     <>
-      <Container fluid>
+      <Container fluid className="catmain">
         <h3>{item.strMeal}</h3>
         <img src={item.strMealThumb} alt="Dish Img" />
         <p>{item.strInstructions}</p>

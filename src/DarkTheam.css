@@ -3,7 +3,7 @@ body.light {
     --bg-gradient-cat:rgba(237, 237, 245, 0.747);
     --bg-color:#09EDF6;
     --txt-color:#05321b;
-    --sec-txt-color:#290707;
+    --sec-txt-color:#070707;
     --third-txt-color:#23412ae8;
     --nav-bg:#86f9c0fa;
     --btn-bg:#19ae61;
@@ -17,37 +17,48 @@ body.light {
     --nav-color:black;
     --card-header:rgb(0, 0, 0);
     --head-txt-color:black;
+    --bx-xh:black;
+    --icon:black;
+    --pg-bg:#19ae61;
+    --pg-txt:#0a0a0a;
 }
 body.dark {
-    --bg-gradient:linear-gradient(0deg,rgba(1, 19, 20, 0.961) 0%, rgba(2, 35, 18, 0.916) 100%);
-    --bg-color:#062020;
-    --txt-color:#eaf6eff8;
-    --sec-txt-color:#0de8d9fe;
+    --bg-gradient:linear-gradient(0deg,rgba(29, 30, 30, 0.961) 0%, rgba(26, 27, 27, 0.916) 100%);
+    --bg-color:#141313;
+    --bg-gradient-cat:rgba(42, 42, 43, 0.918);
+    --txt-color:#fefefe;
+    --sec-txt-color:#cff0eefe;
     --third-txt-color:#81ca92c9;
-    --nav-bg:#1d3c2dfa;
+    --nav-bg:#2d2d2dfa;
     --btn-bg:#19ae61;
     --btn-bg-hover:#156e44;
-    --card-bg:#59c0ab4a;
+    --card-bg:#e2edeb4a;
     --font-head:"Playfair Display", serif;
     --font-sub-head:"PT Serif", serif;
     --font-nav:"Anaheim", sans-serif;
-    --light:black;
-    --light-g:white;
+    --light:rgb(253, 253, 253);
+    --light-g:rgb(5, 5, 5);
     --nav-color:white !important;
+    --bx-xh:rgb(224, 231, 210);
+    --icon:yellow;
+    --card-header:#f7f2f2;
+    --pg-bg:rgba(183, 196, 154, 0.553);
+    --pg-txt:rgba(255, 255, 255, 0.902);
 }
 #root{
     color: var(--txt-color);
-    max-height: 100%;
-    min-height: 100vh;
+    height: 100vh;
 }
 h3{
     color:var(--head-txt-color);
 }
 /* Nav */
+.nav-link,.navbar-brand{
+    color: var(--txt-color) !important;
+}
 nav{
     background: var(--nav-bg) !important;
-    box-shadow: 0px .1em 10px 1px black;
-    color: var(--txt-color) !important;
+    box-shadow: 0px .1em 10px 1px var(--bx-xh);
 }
 a{
 font-family:'Lucida Sans', 'Lucida Sans Regular', sans-serif;
@@ -87,15 +98,6 @@ button:hover{
     cursor: text;
     
 }
-#closesearch{
-    position:fixed;
-    top: 13vh;
-    left: 45%;
-    width: 10%;
-    border: none;
-    background: var(--light) !important;
-    color: var(--light-g);
-}
 #search{
     width:50%;
 }
@@ -107,6 +109,34 @@ button:hover{
     overflow: scroll;
     scrollbar-width: none;
     gap: 1;
+}
+#closesearch{
+    position:fixed;
+    top: 9vh;
+    left: 45%;
+    border: none;
+    background: transparent !important;
+}
+#downicon{
+    width:2em;
+    height:2em;
+    fill: var(--txt-color);
+    background: var(--bg-gradient-cat);
+    border-radius: 10px 10px 0px 0px;
+}
+input{
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('https://www.w3schools.com/Css/searchicon.png');
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 5px 0px 5px 40px;
+  outline: none;
+  border-radius: 1em;
 }
 @media only screen and (max-width: 600px) {
 .searchcont{
@@ -120,7 +150,7 @@ button:hover{
 
 /* Home Page */
 #home{
-    min-height: 89.2vh;
+    min-height: 88vh;
     max-height: 100%;
     background:var(--bg-gradient);
 }
@@ -154,7 +184,7 @@ main h5{
     aspect-ratio: 3/3;
 }
 .card:hover{
-    box-shadow: 1px 1px 10px black;
+    box-shadow: 1px 1px 10px var(--bx-xh);
 }
 .card .card-header{
     border-radius: 1em;
@@ -178,7 +208,7 @@ main h5{
     border-radius: 1em;
 }
 .card img:hover{
-    filter: drop-shadow(4px 4px 10px black);
+    filter: drop-shadow(4px 4px 10px var(--bx-xh));
     transform: scale(1.01);
 }
 
@@ -235,14 +265,18 @@ h3{
 .pageno{
     display: flex;
     justify-content: center;
+    margin-bottom: 5px !important;
 }
 .pageno button{
-    padding: .5em;
+    background: var(--pg-bg) !important;
+    color: var(--pg-txt);
+    padding: .19em .7em;
     border: none;
+    margin: .2em;
+    border-radius: 1em;
 }
 .selected{
     border-radius: 100% !important;
-    margin-inline: .4em;
     transform: scale(1.21);
     transition: all 0.2s ease-in-out;
     background: var(--bg-gradient);
@@ -268,7 +302,13 @@ svg{
 }
 .them{
     margin: .5em;
+    background: transparent !important;
+}
+.them:hover{
+    margin: .5em;
+    background: transparent !important;
 }
 .them svg{
     margin: .5em;
+    fill: var(--icon);
 }

@@ -16,7 +16,7 @@ function App() {
     <>
        <BrowserRouter>
     <div data-theme='dark' id='dark'>
-      <Nav  />
+      <Nav />
       <Routes>
         <Route path="/" element={<><Home /></>} />
         <Route path="/categories" element={<Types />} />

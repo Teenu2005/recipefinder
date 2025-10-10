@@ -15,19 +15,12 @@ body.light {
     --light:white;
     --light-g:gray;
     --nav-color:black;
-    --card-header:rgb(0, 0, 0);
-    --head-txt-color:black;
-    --bx-xh:black;
-    --icon:black;
-    --pg-bg:#19ae61;
-    --pg-txt:#0a0a0a;
 }
 body.dark {
-    --bg-gradient:linear-gradient(0deg,rgba(29, 30, 30, 0.961) 0%, rgba(26, 27, 27, 0.916) 100%);
-    --bg-color:#141313;
-    --bg-gradient-cat:rgba(42, 42, 43, 0.918);
-    --txt-color:#fefefe;
-    --sec-txt-color:#cff0eefe;
+    --bg-gradient:linear-gradient(0deg,rgba(1, 19, 20, 0.961) 0%, rgba(2, 35, 18, 0.916) 100%);
+    --bg-color:#062020;
+    --txt-color:#19ed80c8;
+    --sec-txt-color:#0de8d9fe;
     --third-txt-color:#81ca92c9;
     --nav-bg:#2d2d2dfa;
     --btn-bg:#19ae61;
@@ -48,6 +41,9 @@ body.dark {
 #root{
     color: var(--txt-color);
     height: 100vh;
+}
+h3{
+    color:var(--head-txt-color);
 }
 h3{
     color:var(--head-txt-color);
@@ -92,7 +88,6 @@ button:hover{
     min-width:9em;
     color: var(--light-g);
     max-width: 100%;
-    padding: .2em 3em .2em 0 ;
 }
 #searchbutton:hover{
     cursor: text;
@@ -149,11 +144,6 @@ input{
 }
 
 /* Home Page */
-#home{
-    min-height: 88vh;
-    max-height: 100%;
-    background:var(--bg-gradient);
-}
 main{
     font-family: var(--font-head);
     font-optical-sizing: auto;
@@ -181,10 +171,7 @@ main h5{
     margin-block: 10px;
     background:var(--card-bg);
     border-radius: 1em;
-    aspect-ratio: 3/3;
-}
-.card:hover{
-    box-shadow: 1px 1px 10px var(--bx-xh);
+    aspect-ratio: 3/3.4;
 }
 .card .card-header{
     border-radius: 1em;
@@ -276,10 +263,7 @@ h3{
     border-radius: 1em;
 }
 .selected{
-    border-radius: 100% !important;
-    transform: scale(1.21);
-    transition: all 0.2s ease-in-out;
-    background: var(--bg-gradient);
+
     color: var(--light);
 }
 button:disabled{
@@ -295,20 +279,4 @@ button:disabled{
 [alt="Dish Img"] + p{
     font-family: var(--font-sub-head);
     font-size: larger;
-}
-svg{
-    display: inline;
-    margin:5px 10px 5px 0px;
-}
-.them{
-    margin: .5em;
-    background: transparent !important;
-}
-.them:hover{
-    margin: .5em;
-    background: transparent !important;
-}
-.them svg{
-    margin: .5em;
-    fill: var(--icon);
 }

@@ -1,6 +1,7 @@
 body.light {
     --bg-gradient:linear-gradient(0deg,rgba(9, 238, 246, 0.37) 0%, rgba(6, 249, 123, 0.566) 100%);
     --bg-gradient-cat:rgba(237, 237, 245, 0.747);
+    --bg-btn-gradient:linear-gradient(156deg,rgba(98, 219, 57, 1) 0%, rgba(24, 121, 9, 1) 53%, rgba(0, 255, 85, 1) 100%);
     --bg-color:rgba(255, 255, 255, 0.749);
     --txt-color:#05321b;
     --sec-txt-color:#000000;
@@ -30,6 +31,7 @@ body.light {
     --bg-fav-card:white;
 }
 body.dark {
+    --bg-btn-gradient:linear-gradient(156deg,rgba(98, 219, 57, 1) 0%, rgba(24, 121, 9, 1) 53%, rgba(0, 255, 85, 1) 100%);
     --bg-fav-card:rgba(0, 0, 0, 0.482);
     --bg-gradient:linear-gradient(0deg,rgba(29, 30, 30, 0.961) 0%, rgba(26, 27, 27, 0.916) 100%);
     --bg-color:#282727;
@@ -98,7 +100,21 @@ main h5{
     bottom: 0;
     right: 0;
 }
-
+.btn_grp{
+    /* padding: 1em; */
+    position: absolute;
+    bottom:10%;
+    display: flex;
+    justify-content: space-around;
+}
+.btn_grp button{
+    background: var(--bg-btn-gradient) !important;
+    padding: .5em 1em;
+    border-radius: 2em;
+    color: var(--txt-color);
+    font-weight: 800;
+    margin: auto 4em;
+}
 /* Categories Page */
 .Card_Contanier{
     padding-top:2%;
@@ -214,7 +230,16 @@ button:disabled{
 }
 
 /* Detail */
+.ai_btn{
+    position: absolute;
+    width: 10vw;
+    padding: .5em 1em;
+    border-radius: 1em;
+    right: 1.5em;
+    top: 1.5em;
+}
 .Card_Contanier_detail{
+    position: relative;
     padding: 1em !important;
     background: var(--bg-gradient-cat);
     display: flex;
@@ -231,9 +256,19 @@ button:disabled{
 }
 iframe{
     min-width:370px;
-    max-width: 45vw;
+    max-width:50vw;
+    max-height:15vw;
     height: 300px;
     margin-top:4em !important;
+}
+.ifram_p_divider{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.ifram_p_divider p{
+    width: 90%;
+    white-space: pre-line;
 }
 .Card_Contanier_detail_inner *{
     width: 60%;

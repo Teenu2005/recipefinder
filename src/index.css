@@ -309,3 +309,56 @@ footer{
     all: unset;
     cursor: pointer;
 }
+
+/* Ai component */
+.ai_cont{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background:var(--bg-gradient-cat);
+    padding:2em 1em;
+}
+.ai_cont select{
+    width:50%;
+}
+.ai_form{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 60%;
+}
+.ai_form button{
+    height: fit-content;
+    width:30%;
+}
+.ai_responce_cont{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.ai_responce{
+    background: var(--light) !important;
+    padding: 1.5em;
+    position: static;
+    margin-inline-start: 1em;
+    min-width:45% !important;
+    height: 70vh;
+    overflow: scroll;
+    scrollbar-width:none;
+}
+.ai_btn{
+    padding: .3em !important;
+    background: #62db39;
+    background: var(--bg-btn-gradient)!important;
+}
+button img{
+    width: 1.5em;
+}
+button p{
+    padding-inline: .2em;
+    display: inline;
+    align-items: center;
+    color: white;
+    fill: white;
+}

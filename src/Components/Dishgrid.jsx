@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaChevronRight } from "react-icons/fa";
 
 function Dishgrid(prop) {
+  const API_URL = import.meta.env.VITE_API_BASE_URL;
   const [categories,setCategories] = useState([]);
   const Place = prop.Place;
   const nav = useNavigate();

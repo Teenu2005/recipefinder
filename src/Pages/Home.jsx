@@ -10,7 +10,9 @@ function Home() {
         <main className='heading col-sm-7 p-5'> 
             <h1>Find the Perfect Recipe for Every Mood!</h1>
             <h5>Discover delicious recipes tailored to your taste, ingredients, and lifestyle</h5>
-            <div className="btn-grp">
+            <div className="btn_grp">
+              <button className='home_btn'>Get Started</button>
+              <button className='home_btn'>Try Something New</button>
             </div>
         </main>
         <div className="imgs col-sm-5">

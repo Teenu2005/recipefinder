@@ -13,6 +13,7 @@ import Nativedish from './Components/Nativedish'
 // Context
 import { FavListProvider } from './Context/FavouriteContect'
 import FavouriteList from './Components/FavouriteList'
+import Aihelper from './Components/Aihelper'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -29,6 +30,7 @@ function App() {
         <Route path="/items/:id" element={<FavListProvider><Subcatogries /></FavListProvider>} />
         <Route path="/item/:id" element={<Detail />} />
         <Route path="/native/:place" element={<Nativedish />} />
+        <Route path="/Aihelper/:id" element={<Aihelper />} />
         <Route path="/fav" element={<FavListProvider><FavouriteList /></FavListProvider>} />
       </Routes>
       <Footer />

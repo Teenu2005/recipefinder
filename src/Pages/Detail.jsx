@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { ListGroup, Badge, Container} from "react-bootstrap";
-import { useParams } from "react-router-dom";
-
+import { useParams,useNavigate } from "react-router-dom";
+import img from '../assets/Ai_png.png'
 export default function Detail() {
   const [item, setItem] = useState({});
   const { id } = useParams();
+  const nav = useNavigate();
   useEffect(() => {
     getapi();
   }, []);
@@ -34,9 +35,12 @@ export default function Detail() {
   return (
     <>
       <Container fluid className="Card_Contanier_detail">
-        <h3>{item.strMeal}</h3>
+        <h3>{item.strMeal}</h3> <button className="ai_btn" onClick={()=>{nav(`/Aihelper/${item.idMeal}`)}}><img src={img} /><p>Ask..</p></button>
         <div className="Card_Contanier_detail_inner">
+        <div className="ifram_p_divider">
         <p>{item.strInstructions}</p>
+        <iframe src={`${newone[0]}//${newone[2]}/embed/${newone[3]}`}></iframe>
+        </div>
           <div className="d-flex flex-column">
           <img src={item.strMealThumb} alt="Dish Img" class="img-thumbnail"/>
         <table class="table table-hover">
@@ -55,11 +59,9 @@ export default function Detail() {
         )}</table>
         </div>
         </div>
-           <iframe src={`${newone[0]}//${newone[2]}/embed/${newone[3]}`}></iframe> 
+            
         
       </Container>
     </>
   );
 }
-
-{/* <iframe src={`${newone[0]}//${newone[2]}/embed/${newone[3]}`}></iframe> */}

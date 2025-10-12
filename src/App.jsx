@@ -12,6 +12,7 @@ import Footer from './Components/Footer'
 import Nativedish from './Components/Nativedish'
 // Context
 import { FavListProvider } from './Context/FavouriteContect'
+import FavouriteList from './Components/FavouriteList'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -28,7 +29,7 @@ function App() {
         <Route path="/items/:id" element={<FavListProvider><Subcatogries /></FavListProvider>} />
         <Route path="/item/:id" element={<Detail />} />
         <Route path="/native/:place" element={<Nativedish />} />
-        <Route path="/fav" element={<About />} />
+        <Route path="/fav" element={<FavListProvider><FavouriteList /></FavListProvider>} />
       </Routes>
       <Footer />
 </div>

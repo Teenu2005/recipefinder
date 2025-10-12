@@ -32,17 +32,14 @@ function Nativedish() {
  function getitems(e){
     nav(`/item/${items[e.target.id].idMeal}`)
  }
-function markLike(e){
-  console.lo(e.target)
-}
   return (
     <Container fluid className="Card_Contanier">
-      <h3>{Place}</h3>
+      <h3>{Place.place}</h3>
       <Row md={3} lg={4}>
         {current.map((value, index) => (
           <Col sm={2} key={index}>
             <Card className="itemcard" id={index} onClick={getitems}>
-              <TiHeartFullOutline onClick={markLike} id='heart_icon'/>
+              {/* <TiHeartFullOutline onClick={markLike} id='heart_icon'/> */}
               <Card.Img id={index} src={value.strMealThumb} />
               <Card.Text id={index}>{value.strMeal}</Card.Text>
             </Card>

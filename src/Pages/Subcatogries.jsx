@@ -159,16 +159,16 @@ function Subcatogries() {
     });
   }
 
-  function markLike(e) {
-    const dishId = e.target.id;
-    if (e.target.classList.contains('liked')) {
-      e.target.classList.remove('liked')
-      updateList(dishId);
-    } else {
-      e.target.classList.add('liked');
-      addFav(dishId);
-    }
+function markLike(e) {
+  const dishId = e.currentTarget.id;
+  if (e.currentTarget.classList.contains('liked')) {
+    e.currentTarget.classList.remove('liked')
+    updateList(dishId);
+  } else {
+    e.currentTarget.classList.add('liked');
+    addFav(dishId);
   }
+}
 
   return (
     <Container fluid className="Card_Contanier">

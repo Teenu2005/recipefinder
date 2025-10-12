@@ -27,8 +27,10 @@ body.light {
     --top-text-bg:white;
     --bg-footer:#212529;
     --img-hover-shadow:brightness(100%);
+    --bg-fav-card:white;
 }
 body.dark {
+    --bg-fav-card:rgba(0, 0, 0, 0.482);
     --bg-gradient:linear-gradient(0deg,rgba(29, 30, 30, 0.961) 0%, rgba(26, 27, 27, 0.916) 100%);
     --bg-color:#282727;
     --bg-gradient-cat:rgba(42, 42, 43, 0.918);

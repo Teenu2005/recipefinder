@@ -111,6 +111,11 @@ input{
 table{
     width: 100%;
 }
+/* FavComp */
+.favourite_list_item{
+    flex-direction:column;
+    overflow: scroll;
+}
 
 }
 
@@ -133,6 +138,7 @@ svg{
     fill: var(--icon);
 }
 .heart_icon{
+    cursor: pointer;
     position: absolute;
     z-index: 1;
     right: .2em;
@@ -262,4 +268,44 @@ a svg{
 
 footer{
     background: var(--bg-footer);
+}
+
+/* Favouritelist */
+.favourite_list_cont{
+    display: flex;
+    background:var(--bg-gradient-cat);
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.favourite_list_cont h2{
+    flex-basis: 100%;
+}
+.favourite_list_item{
+    position: relative;
+    background: var(--bg-fav-card);
+    margin: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 1em;
+    width: 500px;
+    height: 300px;
+}
+.favourite_list_item img{
+    min-width:100px;
+    min-height:100px;
+    max-width: 50%;
+    max-height:100%;
+}
+.favourite_dish_detail{
+    width: 50%;
+}
+
+.favourite_dish_detail p{
+    white-space: unset;
+    padding-inline: 10% 5%;
+}
+.favourite_dish_detail  a{
+    all: unset;
+    cursor: pointer;
 }

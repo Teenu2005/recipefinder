@@ -20,6 +20,7 @@ function Home() {
         </div>
         </div>
     </div>
+    {/* adding all component that will apper in landing page */}
     <Dishgrid Place='American'/>
     <Topdish Place='Canadian'/>
     </>

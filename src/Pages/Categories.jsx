@@ -3,15 +3,16 @@ import { Col,Row,Card,Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 function Categories() {
+  const API_URL = import.meta.env.VITE_API_BASE_URL;
   const [categories,setCategories] = useState([]);
   const nav = useNavigate();
   useEffect(
-    ()=>{getapi()}
+    ()=>{getApiResult()}
     ,[]
   )
-  async function getapi() {
+  async function getApiResult() {
     try{
-   await fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
+   await fetch(`${API_URL}categories.php`)
   .then(res => res.json())
   .then(data => {
    setCategories(data.categories); 
@@ -21,7 +22,7 @@ function Categories() {
       console.log(err)
     }
   }
- function getitems(e){
+ function getItems(e){
     nav(`/items/${categories[e.target.id].strCategory}`)
  }
 
@@ -33,7 +34,7 @@ function Categories() {
         {categories.map(
           (value,index)=>{
              return <Col sm md={3} key={index}>
-                <Card id={index} onClick={getitems} >
+                <Card id={index} onClick={getItems} >
                   <Card.Img id={index} src={value.strCategoryThumb} />
                   <Card.Header id={index}>{value.strCategory}</Card.Header>
                 </Card>

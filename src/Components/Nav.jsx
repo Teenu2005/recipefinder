@@ -6,18 +6,20 @@ import { IoIosArrowDown  } from "react-icons/io";
 import { FaMoon } from "react-icons/fa6"; 
 
 function RecipeNav() {
+  const API_URL = import.meta.env.VITE_API_BASE_URL;
   const [showSearch, setShowSearch] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [itemList, setItemList] = useState([]);
   const [filtered, setFiltered] = useState([]);
 
+  // dark them light them logic
   const [dark, setDark] = useState(() => {
     const saved = localStorage.getItem('dark');
     return saved === 'true'; 
   });
 
   useEffect(() => {
-    getapi();
+    getApiResult();
   }, []);
 
   useEffect(() => {
@@ -27,9 +29,10 @@ function RecipeNav() {
     localStorage.setItem('dark', dark ? 'true' : 'false');
   }, [dark]);
 
-  async function getapi() {
+  // get api result for search result
+  async function getApiResult() {
     try {
-      const res = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?i=');
+      const res = await fetch(`${API_URL}filter.php?i=`);
       const data = await res.json();
       setItemList(data?.meals || []);
     } catch (err) {
@@ -66,6 +69,7 @@ function RecipeNav() {
             </Nav>
 
             <Form className="d-flex">
+              {/* for open search molde */}
               <Button onClick={() => setShowSearch(true)} id='searchbutton'>
                 <FaSearch /> Search
               </Button>

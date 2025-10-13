@@ -2,8 +2,9 @@ import {React, useState,useEffect} from 'react'
 import {Card,Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { FaChevronRight } from "react-icons/fa";
-
+// for home page scrolleable component
 function Topdish(prop) {
+  const API_URL = import.meta.env.VITE_API_BASE_URL;
   const [categories,setCategories] = useState([]);
   const Place = prop.Place;
   const nav = useNavigate();
@@ -13,7 +14,7 @@ function Topdish(prop) {
   )
   async function getapi() {
     try{
-   await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${Place}`)
+   await fetch(`${API_URL}filter.php?a=${Place}`)
   .then(res => res.json())
   .then(data => {
    let spliced = data.meals;

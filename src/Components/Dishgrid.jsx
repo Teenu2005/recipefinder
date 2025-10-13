@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaChevronRight } from "react-icons/fa";
 
 function Dishgrid(prop) {
+  // adding env for best practice
   const API_URL = import.meta.env.VITE_API_BASE_URL;
   const [categories,setCategories] = useState([]);
   const Place = prop.Place;
@@ -14,7 +15,7 @@ function Dishgrid(prop) {
   )
   async function getapi() {
     try{
-   await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${Place}`)
+   await fetch(`${API_URL}/filter.php?a=${Place}`) // adding base url and specific url
   .then(res => res.json())
   .then(data => {
    let spliced = data.meals;
@@ -25,6 +26,7 @@ function Dishgrid(prop) {
       console.log(err)
     }
   }
+  // navigate to Native dish component
  function getitems(e){
     nav(`/item/${categories[e.target.id].idMeal}`)
  }

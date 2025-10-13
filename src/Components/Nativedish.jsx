@@ -4,18 +4,20 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { TiHeartFullOutline } from "react-icons/ti";
 
 function Nativedish() {
+  const API_URL = import.meta.env.VITE_API_BASE_URL;
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
   const nav = useNavigate();
   const totalCard = 10;
   const Place = useParams() || "";
   useEffect(() => {
-    getapi();
+    getApiResult();
   }, []);
 
-  async function getapi() {
+  // Api call
+  async function getApiResult() {
     try {
-      await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${Place.place}`)
+      await fetch(`${API_URL}filter.php?a=${Place.place}`)
         .then(res => res.json())
         .then(data => setItems(data.meals));
     } catch (err) {
@@ -23,12 +25,15 @@ function Nativedish() {
     }
   }
 
+  // for pagenation calculate the following value
   let startIndex = (page - 1) * totalCard;
   let endIndex = startIndex + totalCard;
   let current = items.slice(startIndex, endIndex);
 
+  // making a array with specified value
   const arr = Array.from({ length: Math.ceil(items.length / totalCard) }, (_, i) => i + 1);
 
+  // navigate to detail page
  function getitems(e){
     nav(`/item/${items[e.target.id].idMeal}`)
  }

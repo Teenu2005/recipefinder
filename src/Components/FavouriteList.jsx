@@ -5,13 +5,15 @@ import { FavListContext } from '../Context/FavouriteContect';
 
 
 function FavouriteList() {
+  const API_URL = import.meta.env.VITE_API_BASE_URL;
   const [meals, setMeals] = useState([]);
   const { likedDishList, updateList, addFav } = useContext(FavListContext);
 
+  // using use context get favourite list from the local storage then display it
   useEffect(() => {
     if (likedDishList.length > 0) {
       const fetchMeals = async () => {
-        const mealPromises = likedDishList.map(id => fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`).then(res => res.json()));
+        const mealPromises = likedDishList.map(id => fetch(`${API_URL}lookup.php?i=${id}`).then(res => res.json()));
         const mealResponses = await Promise.all(mealPromises);
         const mealsData = mealResponses.map(response => response.meals[0]);
         setMeals(mealsData);
@@ -21,7 +23,7 @@ function FavouriteList() {
     }
   }, [likedDishList]);
 
-  
+  // this is used to add or remove liked and unliked meal from the list using function provided by usecontext
 function markLike(e) {
   const dishId = e.currentTarget.id;
   if (e.currentTarget.classList.contains('liked')) {

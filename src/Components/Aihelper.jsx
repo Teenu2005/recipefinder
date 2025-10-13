@@ -12,6 +12,7 @@ export default function Aihelper() {
 
   const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
+  // getting meal detail from api so using this info we can ask ai
   useEffect(() => {
     async function getMealDetails() {
       try {
@@ -33,6 +34,7 @@ export default function Aihelper() {
     getMealDetails();
   }, [id]);
 
+  // ai api call before chick the meal responce so we ca handel wrong responce from ai
  const handleExplain = async () => {
   if (!mealInstructions) {
     setResponse("No meal instructions available.");

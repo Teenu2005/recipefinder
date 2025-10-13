@@ -3,17 +3,20 @@ import { ListGroup, Badge, Container} from "react-bootstrap";
 import { useParams,useNavigate } from "react-router-dom";
 import img from '../assets/Ai_png.png'
 export default function Detail() {
+  // this is to show all the detail of the recipe 
+  const API_URL = import.meta.env.VITE_API_BASE_URL;
   const [item, setItem] = useState({});
   const { id } = useParams();
   const nav = useNavigate();
   useEffect(() => {
-    getapi();
+    getApiResult();
   }, []);
 
-  async function getapi() {
+  // get result using the id passed through the params
+  async function getApiResult() {
     try {
       const res = await fetch(
-        `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
+        `${API_URL}/lookup.php?i=${id}`
       );
       const data = await res.json();
       setItem(data.meals[0]);
@@ -22,6 +25,8 @@ export default function Detail() {
     }
   }
 
+  // for supperating the ingredient and its quantity details from the result 
+  // also get each ingedient from responce and make a new list so it easy to apply map 
   const ingredients = [];
   for (let i = 1; i <= 20; i++) {
     const ingredient = item[`strIngredient${i}`];

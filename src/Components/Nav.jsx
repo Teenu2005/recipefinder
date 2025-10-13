@@ -4,9 +4,12 @@ import { FaSearch } from "react-icons/fa";
 import { FaRegSun  } from "react-icons/fa6";
 import { IoIosArrowDown  } from "react-icons/io";
 import { FaMoon } from "react-icons/fa6"; 
+import { useNavigate, NavLink } from 'react-router-dom';
+import iconImg from '../assets/Icon.png'
 
 function RecipeNav() {
   const API_URL = import.meta.env.VITE_API_BASE_URL;
+  const nav = useNavigate();
   const [showSearch, setShowSearch] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [itemList, setItemList] = useState([]);
@@ -55,17 +58,26 @@ function RecipeNav() {
     setFiltered(first.slice(0, 10));
   }
 
+   // navigate to detail page
+ function getitems(e){
+  //  console.log(itemList[e.target.id].idMeal)
+    nav(`/item/${itemList[e.target.id].idMeal}`);
+    setShowSearch(false)
+ }
   return (
     <>
       <Navbar  expand="lg">
         <Container fluid>
-          <Navbar.Brand href="#">Recipe</Navbar.Brand>
+          <Navbar.Brand href="#">
+            <img src={iconImg} width='40rem' alt="" />
+            {/* Cook Book */}
+            </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
-              <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/categories">Categories</Nav.Link>
-              <Nav.Link href="/fav">Favourite</Nav.Link>
+              <NavLink to='/' className='nav-link'>Home</NavLink>
+              <NavLink to='/categories' className='nav-link'>Categories</NavLink>
+              <NavLink to='/fav' className='nav-link'>Favourite</NavLink>
             </Nav>
 
             <Form className="d-flex">
@@ -100,9 +112,9 @@ function RecipeNav() {
             <div className="row">
               {filtered.map((value, index) => (
                 <div className="col-sm-3" key={value?.idMeal || index}>
-                  <Card className="itemcard">
-                    <Card.Img src={value?.strMealThumb} />
-                    <Card.Text>{value?.strMeal}</Card.Text>
+                  <Card className="itemcard" onClick={getitems} id={index}>
+                    <Card.Img src={value?.strMealThumb}  id={index} />
+                    <Card.Text  id={index}>{value?.strMeal}</Card.Text>
                   </Card>
                 </div>
               ))}

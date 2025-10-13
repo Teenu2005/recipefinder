@@ -1,7 +1,8 @@
 body.light {
     --bg-gradient:linear-gradient(0deg,rgba(9, 238, 246, 0.37) 0%, rgba(6, 249, 123, 0.566) 100%);
     --bg-gradient-cat:rgba(237, 237, 245, 0.747);
-    --bg-btn-gradient:linear-gradient(156deg,rgba(98, 219, 57, 1) 0%, rgba(24, 121, 9, 1) 53%, rgba(0, 255, 85, 1) 100%);
+    --bg-btn-gradient:linear-gradient(0deg,rgba(34, 195, 39, 1) 0%, rgba(59, 253, 45, 1) 100%);
+    --bg-bgn-gradient-color: rgb(14, 76, 3);
     --bg-btn-hover-gradient:linear-gradient(156deg,rgba(24, 121, 9, 1) 0%, rgba(0, 255, 85, 1) 53%, rgba(24, 121, 9, 1) 100%);
     --bg-color:rgba(255, 255, 255, 0.749);
     --txt-color:#05321b;
@@ -34,6 +35,7 @@ body.light {
 body.dark {
     --bg-btn-gradient:linear-gradient(156deg,rgba(98, 219, 57, 1) 0%, rgba(24, 121, 9, 1) 53%, rgba(0, 255, 85, 1) 100%);
     --bg-fav-card:rgba(0, 0, 0, 0.482);
+    --bg-bgn-gradient-color: white;
     --bg-gradient:linear-gradient(0deg,rgba(29, 30, 30, 0.961) 0%, rgba(26, 27, 27, 0.916) 100%);
     --bg-btn-hover-gradient:linear-gradient(156deg,rgba(24, 121, 9, 1) 0%, rgba(0, 255, 85, 1) 53%, rgba(24, 121, 9, 1) 100%);
     --bg-color:#282727;
@@ -112,7 +114,7 @@ main h5{
 .btn_grp button{
     padding: .5em 1em;
     border-radius: 2em;
-    color: white;
+    color:var(--bg-bgn-gradient-color);
     font-weight: 800;
     margin: auto 4em;
     background: var(--bg-btn-gradient) !important;
@@ -236,6 +238,9 @@ button:disabled{
 }
 
 /* Detail */
+.ai_btn:hover{
+    background: var(--bg-btn-hover-gradient) !important;
+}
 .ai_btn{
     position: absolute;
     width: 10vw;
@@ -301,3 +306,13 @@ svg{
     fill: var(--icon);
 }
 
+/* footer */
+.footer_icon_facebook{
+    fill:rgb(24, 119, 242);
+}
+.footer_icon_insta{
+    fill: #d62976;
+}
+.footer_icon_youtub{
+    fill: #ff0000;
+}

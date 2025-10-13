@@ -27,10 +27,10 @@ export default function Footer() {
           <Col md={4}>
             <h5>Connect with Us</h5>
             <div className="d-flex gap-3">
-              <a href="#" className="text-light"><FaFacebook /></a>
-              <a href="#" className="text-light"><FaInstagram /></a>
-              <a href="#" className="text-light"><FaYoutube /></a>
-              <a href="#" className="text-light"><FaPinterest /></a>
+              <a href="#" className="footer_icon_facebook"><FaFacebook /></a>
+              <a href="#" className="footer_icon_insta"><FaInstagram /></a>
+              <a href="#" className="footer_icon_youtub"><FaYoutube /></a>
+              <a href="#" className="footer_icon_pin"><FaPinterest /></a>
             </div>
             <p className="mt-3 mb-0"> cookbook@gmail.com</p>
           </Col>

@@ -2,6 +2,15 @@
 .nav-link,.navbar-brand{
     color: var(--txt-color) !important;
 }
+.nav-link{
+    border-radius: 2em;
+    margin-inline-start:.5em;
+    padding: .4em;
+}
+.nav-link:hover,.nav-link.active{
+    background:var(--bg-btn-gradient);
+    color:var(--bg-bgn-gradient-color) !important;
+}
 nav{
     background: var(--nav-bg) !important;
     box-shadow: 0px .1em 10px 1px var(--bx-xh);
@@ -116,6 +125,19 @@ table{
     flex-direction:column;
     overflow: scroll;
 }
+.btn_grp{
+    all: unset;
+    width:30%;
+    top: 0;
+    left: 0;
+}
+.btn_grp button{
+    
+}
+iframe{
+    width:400px !important;
+}
+
 
 }
 
@@ -349,7 +371,6 @@ footer{
 }
 .ai_btn{
     padding: .3em !important;
-    background: #62db39;
     background: var(--bg-btn-gradient)!important;
 }
 button img{

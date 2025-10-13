@@ -11,6 +11,7 @@ export default function Aihelper() {
   const [loading, setLoading] = useState(false);
 
   const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+  const GEMINI_MODEL_ID = import.meta.env.VITE_MODEL_ID;
 
   // getting meal detail from api so using this info we can ask ai
   useEffect(() => {
@@ -48,7 +49,7 @@ export default function Aihelper() {
 
   try {
     const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL_ID}:generateContent?key=${GEMINI_API_KEY}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -102,10 +103,6 @@ export default function Aihelper() {
       </Button>
       </div>
       <div className="ai_responce_cont">
-      <Card className="ai_responce">
-        <h6>Original Instructions:</h6>
-        <p style={{ whiteSpace: "pre-line" }}>{mealInstructions}</p>
-      </Card>
 
       {response && (
         <Card className="ai_responce">
@@ -113,6 +110,11 @@ export default function Aihelper() {
           <p>{response}</p>
         </Card>
       )}
+
+      <Card className="ai_responce">
+        <h6>Original Instructions:</h6>
+        <p style={{ whiteSpace: "pre-line" }}>{mealInstructions}</p>
+      </Card>
       </div>
       </div>
     </div>

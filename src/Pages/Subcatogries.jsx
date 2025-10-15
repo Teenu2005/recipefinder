@@ -3,6 +3,7 @@ import { Col, Row, Card, Container, Button } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import { TiHeartFullOutline } from "react-icons/ti";
 import { FavListContext } from '../Context/FavouriteContect';
+import { fetchData } from '../service/Api';
 
 function Subcatogries() {
   const API_URL = import.meta.env.VITE_API_BASE_URL;
@@ -10,9 +11,14 @@ function Subcatogries() {
   const [page, setPage] = useState(1);
   const { likedDishList, updateList, addFav } = useContext(FavListContext);
   const nav = useNavigate();
-  const totalCard = 10;
-  const cat = useParams() || "";
+  const totalCard = 12;
+  const categorie = useParams() || "";
   useEffect(() => {
+    // async function to get the result from api using fetchData function declared in aip.js in service folder
+    async function getApiResult(){
+      const data = await fetchData(`/filter.php?c=${categorie.id}`)
+      setItems(data.meals);
+    }
     getApiResult();
   }, []);
 
@@ -20,17 +26,6 @@ function Subcatogries() {
     likeMarkerFun(likedDishList);
   }, [items, likedDishList]);
 
-  async function getApiResult() {
-    try {
-      await fetch(`${API_URL}/filter.php?c=${cat.id}`)
-        .then(res => res.json())
-        .then(data => setItems(data.meals));
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  // below logic if for adding pageination to this component 
   let startIndex = (page - 1) * totalCard; //start index for find each pagage starting itme 
   let endIndex = startIndex + totalCard; // end index for find last item of the page
   let current = items.slice(startIndex, endIndex); // its to maintain list for current page from orginal list
@@ -67,7 +62,7 @@ function markLike(e) {
 
   return (
     <Container fluid className="Card_Contanier">
-      <h3>{cat.id}</h3>
+      <h3>{categorie.id}</h3>
       <Row md={3} lg={4}>
         {current.map((value, index) => (
           <Col sm={2} key={index}>

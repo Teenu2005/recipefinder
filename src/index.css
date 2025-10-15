@@ -214,6 +214,9 @@ svg{
     cursor: pointer;
 }
 .home_component_head{
+    /* font-family: var(--font-on-img) !important; */
+    font-family:"Playwrite DE SAS", cursive !important;
+    filter: blur(100);
     font-size: large;
     font-weight: 600;
 }
@@ -273,9 +276,9 @@ a svg{
 }
 [class *=grid_child ] h3{
     position: absolute;
-    background: var(--light);
+    background: #964949 !important;
     padding: .5em;
-    color: var(--light-g);
+    color: white;
     border-radius: .8em 0;
     top: 0;
 }

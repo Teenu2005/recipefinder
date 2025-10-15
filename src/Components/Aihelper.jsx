@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, Spinner, Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import {fetchData} from '../service/Api'
 
 export default function Aihelper() {
   const { id } = useParams(); 
@@ -15,24 +16,12 @@ export default function Aihelper() {
 
   // getting meal detail from api so using this info we can ask ai
   useEffect(() => {
-    async function getMealDetails() {
-      try {
-        const res = await fetch(
-          `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
-        );
-        const data = await res.json();
-        if (data.meals && data.meals.length > 0) {
-          setMealInstructions(data.meals[0].strInstructions);
-          setMealName(data.meals[0].strMeal);
-        } else {
-          setMealInstructions("No instructions found for this meal.");
-        }
-      } catch (err) {
-        console.error("Error fetching meal:", err);
-        setMealInstructions("Error fetching meal details.");
-      }
+      async function getApiResult(){
+      const data = await fetchData(`lookup.php?i=${id}`)
+      setMealInstructions(data.meals[0].strInstructions);
+      setMealName(data.meals[0].strMeal);
     }
-    getMealDetails();
+    getApiResult();
   }, [id]);
 
   // ai api call before chick the meal responce so we ca handel wrong responce from ai

@@ -1,28 +1,25 @@
 import img from '../assets/cookimg.png'
-import About from './About'
 import Topdish from '../Components/Topdish'
+import About from './About'
 import Dishgrid from '../Components/Dishgrid'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { fetchData } from '../service/Api'
 function Home() {
   const nav = useNavigate();
   const [random,setRandom] = useState([]);
-  const API_URL = import.meta.env.VITE_API_BASE_URL;
 
   // make api call for randome generation
   useEffect(()=>{
-    getApiResult();}
+    // async function to get the result from api using fetchData function declared in aip.js in service folder
+    async function getApiResult(){
+      const data = await fetchData(`random.php`);
+      setRandom(data.meals);
+    }
+    getApiResult();
+  }
     ,[])
 
-  async function getApiResult() {
-    try {
-      await fetch(`${API_URL}random.php`)
-        .then(res => res.json())
-        .then(data => setRandom(data.meals));
-    } catch (err) {
-      console.log(err);
-    }
-  }
 
   // function to navigate to randome ly gnerated dishes
   function navgationToRandom(){
@@ -48,8 +45,13 @@ function Home() {
     </div>
     {/* adding all component that will apper in landing page */}
     <Dishgrid Place='American'/>
+    <hr />
     <Topdish Place='Canadian'/>
+    <hr />
     <Dishgrid Place='Indian'/>
+    <hr />
+    <About />
+    <hr />
     </>
   )
 }

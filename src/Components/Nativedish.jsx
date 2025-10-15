@@ -2,28 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { Col, Row, Card, Container, Button } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import { TiHeartFullOutline } from "react-icons/ti";
+import {fetchData} from '../service/Api'
 
 function Nativedish() {
-  const API_URL = import.meta.env.VITE_API_BASE_URL;
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
   const nav = useNavigate();
   const totalCard = 10;
   const Place = useParams() || "";
   useEffect(() => {
+    // async function to get the result from api using fetchData function declared in aip.js in service folder
+    async function getApiResult(){
+      const data = await fetchData(`filter.php?a=${Place.place}`);
+      setItems(data.meals);
+    }
     getApiResult();
   }, []);
 
-  // Api call
-  async function getApiResult() {
-    try {
-      await fetch(`${API_URL}filter.php?a=${Place.place}`)
-        .then(res => res.json())
-        .then(data => setItems(data.meals));
-    } catch (err) {
-      console.log(err);
-    }
-  }
+
 
   // for pagenation calculate the following value
   let startIndex = (page - 1) * totalCard;

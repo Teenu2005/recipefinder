@@ -2,28 +2,22 @@ import { useState, useEffect } from "react";
 import { ListGroup, Badge, Container} from "react-bootstrap";
 import { useParams,useNavigate } from "react-router-dom";
 import img from '../assets/Ai_png.png'
+import {fetchData} from '../service/Api'
+
 export default function Detail() {
   // this is to show all the detail of the recipe 
-  const API_URL = import.meta.env.VITE_API_BASE_URL;
   const [item, setItem] = useState({});
   const { id } = useParams();
   const nav = useNavigate();
   useEffect(() => {
+    // async function to get the result from api using fetchData function declared in aip.js in service folder
+    async function getApiResult(){
+      const data = await fetchData(`/lookup.php?i=${id}`)
+      setItem(data.meals[0]);
+    }
     getApiResult();
   }, []);
 
-  // get result using the id passed through the params
-  async function getApiResult() {
-    try {
-      const res = await fetch(
-        `${API_URL}/lookup.php?i=${id}`
-      );
-      const data = await res.json();
-      setItem(data.meals[0]);
-    } catch (err) {
-      console.log(err);
-    }
-  }
 
   // for supperating the ingredient and its quantity details from the result 
   // also get each ingedient from responce and make a new list so it easy to apply map 
@@ -47,7 +41,7 @@ export default function Detail() {
         <iframe src={`${newone[0]}//${newone[2]}/embed/${newone[3]}`}></iframe>
         </div>
           <div className="d-flex flex-column">
-          <img src={item.strMealThumb} alt="Dish Img" class="img-thumbnail"/>
+          <img src={item.strMealThumb} alt="Dish Img" className="img-thumbnail"/>
         <table class="table table-hover">
           <tr>
           <th>Ingredient</th>

@@ -13,6 +13,7 @@ body.light {
     --btn-bg-hover:#156e44;
     --card-bg:#59c0ab4a;
     --font-head:"Playfair Display", sans-serif;
+    --font-on-img:"Playwrite DE SAS", cursive;
     --font-sub-head:"PT Serif", serif;
     --font-nav:"Anaheim", sans-serif;
     --body-txt:'Open Sans', sans-serif;;
@@ -72,6 +73,9 @@ body.dark {
     color: var(--txt-color);
     background: var(--bg-color);
 }
+/* h1{
+    font-family: "Playwrite US Modern", cursive;
+} */
 h3{
     color:var(--head-txt-color);
     margin: .3em;
@@ -315,4 +319,42 @@ svg{
 }
 .footer_icon_youtub{
     fill: #ff0000;
+}
+
+/* about component */
+.about_form_contanier{
+    background:var(--bg-gradient-cat);
+    height:50vh;
+    border-radius: 1em;
+}
+.about_form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:space-evenly !important;
+    padding: 1em;
+    height: 100%;
+}
+.about_form form{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content:space-around !important;
+}
+.about_form form input{
+    background: url(none);
+    background: white;
+}
+.about_form form button{
+    border-radius: .5em;
+    background:var(--bg-btn-gradient) !important;
+    border: none;
+}
+.about_form form button:hover{
+    border-radius: .5em;
+    background:var(--bg-btn-hover-gradient) !important;
+
+}
+.about_form h3{
+
 }

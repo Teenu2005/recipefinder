@@ -2,30 +2,24 @@ import {React, useState,useEffect} from 'react'
 import {Card,Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { FaChevronRight } from "react-icons/fa";
+import { fetchData } from '../service/Api';
 
 function Dishgrid(prop) {
   // adding env for best practice
-  const API_URL = import.meta.env.VITE_API_BASE_URL;
   const [categories,setCategories] = useState([]);
   const Place = prop.Place;
   const nav = useNavigate();
   useEffect(
-    ()=>{getapi()}
+    ()=>{
+      // async function to get the result from api using fetchData function declared in aip.js in service folder
+      async function getApiResult(){
+      const data = await fetchData(`/filter.php?a=${Place}`)
+      setCategories(data.meals.slice(0,5));
+    }
+    getApiResult();
+    }
     ,[]
   )
-  async function getapi() {
-    try{
-   await fetch(`${API_URL}/filter.php?a=${Place}`) // adding base url and specific url
-  .then(res => res.json())
-  .then(data => {
-   let spliced = data.meals;
-   setCategories(spliced.slice(0,5));
-  })
-}
-    catch(err){
-      console.log(err)
-    }
-  }
   // navigate to Native dish component
  function getitems(e){
     nav(`/item/${categories[e.target.id].idMeal}`)

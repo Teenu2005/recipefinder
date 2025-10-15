@@ -1,27 +1,23 @@
 import {React, useState,useEffect} from 'react'
 import { Col,Row,Card,Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { fetchData } from '../service/Api';
 
 function Categories() {
-  const API_URL = import.meta.env.VITE_API_BASE_URL;
   const [categories,setCategories] = useState([]);
   const nav = useNavigate();
   useEffect(
-    ()=>{getApiResult()}
+    ()=>{
+      // async function to get the result from api using fetchData function declared in aip.js in service folder
+      async function get(){
+        const data = await fetchData(`categories.php`)
+        setCategories(data.categories)
+      }
+      get();
+    }
     ,[]
   )
-  async function getApiResult() {
-    try{
-   await fetch(`${API_URL}categories.php`)
-  .then(res => res.json())
-  .then(data => {
-   setCategories(data.categories); 
-  })
-}
-    catch(err){
-      console.log(err)
-    }
-  }
+
  function getItems(e){
     nav(`/items/${categories[e.target.id].strCategory}`)
  }

@@ -2,10 +2,9 @@ import React, { useState, useEffect,useContext } from 'react';
 import { Card, Container, Row, Col } from 'react-bootstrap';
 import { TiHeartFullOutline } from "react-icons/ti";
 import { FavListContext } from '../Context/FavouriteContect';
-
+import {fetchData} from '../service/Api'
 
 function FavouriteList() {
-  const API_URL = import.meta.env.VITE_API_BASE_URL;
   const [meals, setMeals] = useState([]);
   const { likedDishList, updateList, addFav } = useContext(FavListContext);
 
@@ -13,7 +12,9 @@ function FavouriteList() {
   useEffect(() => {
     if (likedDishList.length > 0) {
       const fetchMeals = async () => {
-        const mealPromises = likedDishList.map(id => fetch(`${API_URL}lookup.php?i=${id}`).then(res => res.json()));
+        // here use the map function to favourite list get the detail of each data from api
+        const mealPromises = likedDishList.map(id => fetchData(`lookup.php?i=${id}`));
+        // this is to hold the exection for all respons the promise all only return all api call return success
         const mealResponses = await Promise.all(mealPromises);
         const mealsData = mealResponses.map(response => response.meals[0]);
         setMeals(mealsData);
@@ -37,7 +38,7 @@ function markLike(e) {
 
   return (
       <div className='favourite_list_cont'>
-      <h2>Favourite Meals</h2>
+      <h3>Favourite Meals</h3>
         {meals.map(meal => (
           <div className='favourite_list_item' key={meal.idMeal} sm={12} md={6} lg={4}>
               <TiHeartFullOutline onClick={markLike} id={meal.idMeal} className={`heart_icon ${likedDishList.includes(meal.idMeal) ? 'liked' : ''}`} />

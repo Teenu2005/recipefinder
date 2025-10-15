@@ -6,9 +6,8 @@ import { IoIosArrowDown  } from "react-icons/io";
 import { FaMoon } from "react-icons/fa6"; 
 import { useNavigate, NavLink } from 'react-router-dom';
 import iconImg from '../assets/Icon.png'
-
+import { fetchData } from '../service/Api';
 function RecipeNav() {
-  const API_URL = import.meta.env.VITE_API_BASE_URL;
   const nav = useNavigate();
   const [showSearch, setShowSearch] = useState(false);
   const [searchValue, setSearchValue] = useState('');
@@ -22,6 +21,11 @@ function RecipeNav() {
   });
 
   useEffect(() => {
+    // async function to get the result from api using fetchData function declared in aip.js in service folder
+    async function getApiResult(){
+      const data = await fetchData(`filter.php?i=`)
+      setItemList(data.meals);
+    }
     getApiResult();
   }, []);
 
@@ -31,17 +35,6 @@ function RecipeNav() {
     document.body.classList.toggle('light', !dark);
     localStorage.setItem('dark', dark ? 'true' : 'false');
   }, [dark]);
-
-  // get api result for search result
-  async function getApiResult() {
-    try {
-      const res = await fetch(`${API_URL}filter.php?i=`);
-      const data = await res.json();
-      setItemList(data?.meals || []);
-    } catch (err) {
-      console.error(err);
-    }
-  }
 
   function search(e) {
     const q = e.target.value || '';

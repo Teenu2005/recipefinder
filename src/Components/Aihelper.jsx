@@ -1,73 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, Spinner, Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import {fetchData} from '../service/Api'
+import {fetchDatas} from '../service/Api'
 
 export default function Aihelper() {
   const { id } = useParams(); 
   const [language, setLanguage] = useState("English");
-  const [mealName, setMealName] = useState("");
-  const [mealInstructions, setMealInstructions] = useState("");
-  const [response, setResponse] = useState("");
-  const [loading, setLoading] = useState(false);
 
-  const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
-  const GEMINI_MODEL_ID = import.meta.env.VITE_MODEL_ID;
-
-  // getting meal detail from api so using this info we can ask ai
-  useEffect(() => {
-      async function getApiResult(){
-      const data = await fetchData(`lookup.php?i=${id}`)
-      setMealInstructions(data.meals[0].strInstructions);
-      setMealName(data.meals[0].strMeal);
-    }
-    getApiResult();
-  }, [id]);
-
-  // ai api call before chick the meal responce so we ca handel wrong responce from ai
- const handleExplain = async () => {
-  if (!mealInstructions) {
-    setResponse("No meal instructions available.");
-    return;
-  }
-
-  setLoading(true);
-  setResponse("");
-
-  const prompt = `Explain the following recipe instructions in ${language} in a friendly and simple way:\n\n${mealInstructions}`;
-
-  try {
-    const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL_ID}:generateContent?key=${GEMINI_API_KEY}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [
-            {
-              role: "user",
-              parts: [{ text: prompt }],
-            },
-          ],
-        }),
-      }
-    );
-
-    const data = await res.json();
-    console.log("Gemini Response:", data);
-
-    const textOutput =
-      data?.candidates?.[0]?.content?.parts?.[0]?.text ||
-      "No response from AI.";
-    setResponse(textOutput);
-  } catch (error) {
-    console.error(error);
-    setResponse("Error connecting to AI API. Please try again later.");
-  }
-
-  setLoading(false);
-};
-
+  
 
   return (
     <div className="contanier-fluid">

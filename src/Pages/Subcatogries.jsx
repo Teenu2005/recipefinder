@@ -1,92 +1,145 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Col, Row, Card, Container, Button } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Col, Row, Card, Container, Spinner } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import { TiHeartFullOutline } from "react-icons/ti";
-import { FavListContext } from '../Context/FavouriteContect';
-import { fetchData } from '../service/Api';
+import { fetchDatas, postDataAuth, deleteDataAuth, fetchDatasAuth } from '../service/Api';
 
 function Subcatogries() {
-  const API_URL = import.meta.env.VITE_API_BASE_URL;
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
-  const { likedDishList, updateList, addFav } = useContext(FavListContext);
+  const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [likedList, setLikedList] = useState([]); // store list of favourite IDs
   const nav = useNavigate();
-  const totalCard = 12;
-  const categorie = useParams() || "";
+  const categorie = useParams();
+  const pageSize = 12;
+
+  // ✅ Fetch category items
   useEffect(() => {
-    // async function to get the result from api using fetchData function declared in aip.js in service folder
-    async function getApiResult(){
-      const data = await fetchData(`/filter.php?c=${categorie.id}`)
-      setItems(data.meals);
+    async function getApiResult() {
+      setLoading(true);
+      try {
+        const url = `/recipeBook/recipe/Search/category?category=${categorie.id}&pageNumber=${page}&pageSize=${pageSize}`;
+        const data = await fetchDatas(url);
+
+        if (data && data.items) {
+          setItems(data.items);
+          setTotalPages(data.totalPages || 1);
+        } else {
+          setItems([]);
+        }
+      } catch (error) {
+        console.error("API Error:", error);
+      } finally {
+        setLoading(false);
+      }
     }
+
     getApiResult();
+  }, [categorie.id, page]);
+
+  // ✅ Fetch user's favourite list once
+  useEffect(() => {
+    async function getFavourites() {
+      try {
+        const favResponse = await fetchDatasAuth('/recipebookUser/fav');
+        if (favResponse?.responce?.favList) {
+          setLikedList(favResponse.responce.favList.map(id => parseInt(id)));
+        }
+      } catch (err) {
+        console.error("Failed to fetch favourites:", err);
+      }
+    }
+    getFavourites();
   }, []);
 
-  useEffect(() => {
-    likeMarkerFun(likedDishList);
-  }, [items, likedDishList]);
+  // ✅ Handle Like/Unlike click
+  const markLike = async (e) => {
+    const dishId = parseInt(e.currentTarget.id);
+    const isLiked = likedList.includes(dishId);
 
-  let startIndex = (page - 1) * totalCard; //start index for find each pagage starting itme 
-  let endIndex = startIndex + totalCard; // end index for find last item of the page
-  let current = items.slice(startIndex, endIndex); // its to maintain list for current page from orginal list
+    // Optimistically update UI first
+    setLikedList(prev => 
+      isLiked ? prev.filter(id => id !== dishId) : [...prev, dishId]
+    );
 
-  // create new arra based on the number of page for adding buttons 
-  const arr = Array.from({ length: Math.ceil(items.length / totalCard) }, (_, i) => i + 1);
-
-  // call to detail component
-  function getitems(e) {
-    nav(`/item/${items[e.target.id].idMeal}`)
-  }
-
-  // it is to marke liked dish when the page is loaded
-  const likeMarkerFun = (likedDishList) => {
-    likedDishList.forEach(element => {
-      const heartIcon = document.getElementById(element);
-      if (heartIcon) {
-        heartIcon.classList.add('liked')
+    try {
+      if (isLiked) {
+        // 🔹 Remove favourite
+        await deleteDataAuth(`/recipebookUser/fav/${dishId}`);
+      } else {
+        // 🔹 Add favourite
+        await postDataAuth(`/recipebookUser/fav/${dishId}`, {});
       }
-    });
-  }
+    } catch (error) {
+      console.error("Error updating favourite:", error);
+      // Revert UI if error
+      setLikedList(prev =>
+        isLiked ? [...prev, dishId] : prev.filter(id => id !== dishId)
+      );
+    }
+  };
 
-  // this is for hande like and dislke button
-function markLike(e) {
-  const dishId = e.currentTarget.id;
-  if (e.currentTarget.classList.contains('liked')) {
-    e.currentTarget.classList.remove('liked')
-    updateList(dishId);
-  } else {
-    e.currentTarget.classList.add('liked');
-    addFav(dishId);
-  }
-}
+  const getitems = (id) => {
+    nav(`/item/${id}`);
+  };
 
   return (
     <Container fluid className="Card_Contanier">
       <h3>{categorie.id}</h3>
-      <Row md={3} lg={4}>
-        {current.map((value, index) => (
-          <Col sm={2} key={index}>
-            <Card className="itemcard">
-              <TiHeartFullOutline onClick={markLike} id={value.idMeal} className={`heart_icon ${likedDishList.includes(value.idMeal) ? 'liked' : ''}`} />
-              <Card.Img src={value.strMealThumb} onClick={() => getitems({ target: { id: index } })} />
-              <Card.Text>{value.strMeal}</Card.Text>
-            </Card>
-          </Col>
-        ))}
-      </Row>
-      <div className="pageno ">
-        <button onClick={() => setPage(prev => (prev > 1 ? prev - 1 : prev))} style={page == 1 ? { display: 'none' } : null} >
-          &larr; Prev
-        </button>
-        {arr.map((num) => (
-          <button key={num} className={num === page ? "selected" : "notselected"} onClick={() => setPage(num)} >
-            {num}
-          </button>
-        ))}
-        <button onClick={() => setPage(prev => (prev < arr.length ? prev + 1 : prev))} style={page == arr.length ? { display: 'none' } : null} >
-          &rarr; Next
-        </button>
-      </div>
+
+      {loading ? (
+        <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem' }}>
+          <Spinner animation="border" variant="primary" />
+        </div>
+      ) : (
+        <>
+          <Row md={3} lg={4}>
+            {items.map((value, index) => (
+              <Col sm={2} key={index}>
+                <Card className="itemcard">
+                  <TiHeartFullOutline
+                    onClick={markLike}
+                    id={value.recipeId}
+                    className={`heart_icon ${likedList.includes(value.recipeId) ? 'liked' : ''}`}
+                  />
+                  <Card.Img
+                    src={value.imageUrl || "https://via.placeholder.com/150"}
+                    onClick={() => getitems(value.recipeId)}
+                  />
+                  <Card.Text>{value.name}</Card.Text>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+
+          <div className="pageno">
+            <button
+              onClick={() => setPage(prev => (prev > 1 ? prev - 1 : prev))}
+              style={page === 1 ? { display: 'none' } : null}
+            >
+              &larr; Prev
+            </button>
+
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((num) => (
+              <button
+                key={num}
+                className={num === page ? "selected" : "notselected"}
+                onClick={() => setPage(num)}
+              >
+                {num}
+              </button>
+            ))}
+
+            <button
+              onClick={() => setPage(prev => (prev < totalPages ? prev + 1 : prev))}
+              style={page === totalPages ? { display: 'none' } : null}
+            >
+              &rarr; Next
+            </button>
+          </div>
+        </>
+      )}
     </Container>
   );
 }

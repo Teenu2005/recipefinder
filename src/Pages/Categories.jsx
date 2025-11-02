@@ -1,46 +1,69 @@
-import {React, useState,useEffect} from 'react'
-import { Col,Row,Card,Container } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Col, Row, Card, Container, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { fetchData } from '../service/Api';
+import { fetchDatas } from '../service/Api';
 
 function Categories() {
-  const [categories,setCategories] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
   const nav = useNavigate();
-  useEffect(
-    ()=>{
-      // async function to get the result from api using fetchData function declared in aip.js in service folder
-      async function get(){
-        const data = await fetchData(`categories.php`)
-        setCategories(data.categories)
-      }
-      get();
-    }
-    ,[]
-  )
 
- function getItems(e){
-    nav(`/items/${categories[e.target.id].strCategory}`)
- }
+  useEffect(() => {
+    async function get() {
+      try {
+        // Use your API endpoint
+        const data = await fetchDatas(`/recipeBook/Category/getCategories`);
+        setCategories(data);
+        
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    get();
+  }, []);
+
+  function getItems(e) {
+    const categoryName = e.currentTarget.getAttribute('data-name');
+    nav(`/items/${encodeURIComponent(categoryName)}`);
+  }
+
+  const placeholderImg = 'https://via.placeholder.com/300x200?text=No+Image';
+
+  if (loading) {
+    return (
+      <Container className="text-center my-5">
+        <Spinner animation="border" variant="primary" />
+        <p>Loading categories...</p>
+      </Container>
+    );
+  }
 
   return (
-    <>
-    <Container fluid className='Card_Contanier'>
+    <Container fluid className="Card_Contanier">
       <h3>Top Categories</h3>
       <Row md={3} lg={5}>
-        {categories.map(
-          (value,index)=>{
-             return <Col sm md={3} key={index}>
-                <Card id={index} onClick={getItems} >
-                  <Card.Img id={index} src={value.strCategoryThumb} />
-                  <Card.Header id={index}>{value.strCategory}</Card.Header>
-                </Card>
-              </Col>
-          }
-        )}
+        {categories.map((value, index) => (
+          <Col sm md={3} key={index}>
+            <Card
+              data-name={value.name}
+              onClick={getItems}
+              className="category-card"
+              style={{ cursor: 'pointer' }}
+            >
+              <Card.Img
+                src={value.imgUrl || placeholderImg}
+                alt={value.name}
+                style={{ height: '200px', objectFit: 'cover' }}
+              />
+              <Card.Header>{value.name}</Card.Header>
+            </Card>
+          </Col>
+        ))}
       </Row>
     </Container>
-    </>
-  )
+  );
 }
 
 export default Categories;

@@ -7,9 +7,10 @@ import Home from './Pages/Home'
 import Categories from './Pages/Categories'
 import Subcatogries from './Pages/Subcatogries'
 import Detail from './Components/Detail'
-import About from './Pages/About'
+import RegisterLoginForm from './Components/RegisterLoginForm'
 import Footer from './Pages/Footer'
 import Nativedish from './Components/Nativedish'
+import Profile from './Components/Profile'
 // Context
 import { FavListProvider } from './Context/FavouriteContect'
 import FavouriteList from './Components/FavouriteList'
@@ -31,6 +32,8 @@ function App() {
         <Route path="/item/:id" element={<Detail />} />
         <Route path="/native/:place" element={<Nativedish />} />
         <Route path="/Aihelper/:id" element={<Aihelper />} />
+        <Route path="/login" element={<RegisterLoginForm />} />
+        <Route path='/profile' element={<Profile/>}/>
         <Route path="/fav" element={<FavListProvider><FavouriteList /></FavListProvider>} />
       </Routes>
       <Footer />

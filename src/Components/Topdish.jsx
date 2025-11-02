@@ -1,50 +1,63 @@
-import {React, useState,useEffect} from 'react'
-import {Card,Container } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Card, Container, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { FaChevronRight } from "react-icons/fa";
-import { fetchData } from '../service/Api';
+import { fetchDatas } from '../service/Api';
 
-// for home page scrolleable component
-function Topdish(prop) {
-  const [categories,setCategories] = useState([]);
-  const Place = prop.Place;
+function Topdish({ Place }) {
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
   const nav = useNavigate();
-  useEffect(
-    ()=>{
-      // async function to get the result from api using fetchData function declared in aip.js in service folder
-      async function getApiResult(){
-      const data = await fetchData(`filter.php?a=${Place}`)
-      setCategories(data.meals.slice(0,5));
-    }
-    getApiResult();
-    }
-    ,[]
-  )
 
- function getitems(e){
-    nav(`/item/${categories[e.target.id].idMeal}`)
- }
+  useEffect(() => {
+    async function getApiResult() {
+      setLoading(true);
+      try {
+        // Fetch top 5 recipes from paginated API
+        const data = await fetchDatas(`/recipeBook/recipe/Search/area?area=${Place}&pageNumber=1&pageSize=5`);
+        setCategories(data.items || []);
+      } catch (error) {
+        console.error("Error fetching top dishes:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    getApiResult();
+  }, [Place]);
+
+  if (loading) return <Spinner animation="border" variant="primary" />;
+
+  if (!categories.length) return <p>No recipes found for {Place}.</p>;
+
+  function goToRecipe(id) {
+    nav(`/item/${id}`);
+  }
 
   return (
-    <>
     <Container fluid className='home_component_top'>
       <div className="nav_cat">
-            <h3>{Place}</h3>
-            <a  href={`/native/${Place}`}><FaChevronRight /></a>
-            </div>
-    <Container fluid className='home_component'>
-        {categories.map(
-          (value,index)=>{
-            return<div id={index} key={index} onClick={getitems} className='home_component_div'>
-                  <Card.Img id={index} src={value.strMealThumb} className='home_component_img'/>
-                  <h3 className='home_component_head' id={index}>{value.strMeal}</h3>
-                </div>
-          }
-        )}
+        <h3>{Place}</h3>
+        <a href={`/native/${Place}`}><FaChevronRight /></a>
+      </div>
+      <Container fluid className='home_component'>
+        {categories.map((recipe) => (
+          <div 
+            key={recipe.recipeId} 
+            className='home_component_div' 
+            onClick={() => goToRecipe(recipe.recipeId)}
+          >
+            <Card.Img 
+              src={recipe.imageUrl || 'https://via.placeholder.com/150'} 
+              className='home_component_img' 
+              alt={recipe.name}
+            />
+            <h3 className='home_component_head'>{recipe.name}</h3>
+          </div>
+        ))}
+      </Container>
     </Container>
-    </Container>
-    </>
-  )
+  );
 }
 
-export default Topdish 
+export default Topdish;

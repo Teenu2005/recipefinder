@@ -4,17 +4,17 @@ import About from './About'
 import Dishgrid from '../Components/Dishgrid'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { fetchData } from '../service/Api'
+import {  fetchDatas } from '../service/Api'
 function Home() {
   const nav = useNavigate();
-  const [random,setRandom] = useState([]);
+  const [random,setRandom] = useState(0);
 
   // make api call for randome generation
   useEffect(()=>{
     // async function to get the result from api using fetchData function declared in aip.js in service folder
     async function getApiResult(){
-      const data = await fetchData(`random.php`);
-      setRandom(data.meals);
+      const data = await fetchDatas(`/recipeBook/recipe/Filter/random`);
+      setRandom(data[0].recipeId);
     }
     getApiResult();
   }
@@ -23,7 +23,7 @@ function Home() {
 
   // function to navigate to randome ly gnerated dishes
   function navgationToRandom(){
-    nav(`/item/${random[0].idMeal}`)
+    nav(`/item/${random}`)
   }
 
   return (
@@ -46,7 +46,7 @@ function Home() {
     {/* adding all component that will apper in landing page */}
     <Dishgrid Place='American'/>
     <hr />
-    <Topdish Place='Canadian'/>
+    <Topdish Place='Mexican'/>
     <hr />
     <Dishgrid Place='Indian'/>
     <hr />

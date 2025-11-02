@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Col, Row, Card, Container, Button } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import { TiHeartFullOutline } from "react-icons/ti";
-import {fetchData} from '../service/Api'
+import {fetchDatas} from '../service/Api'
 
 function Nativedish() {
   const [items, setItems] = useState([]);
@@ -13,7 +13,7 @@ function Nativedish() {
   useEffect(() => {
     // async function to get the result from api using fetchData function declared in aip.js in service folder
     async function getApiResult(){
-      const data = await fetchData(`filter.php?a=${Place.place}`);
+      const data = await fetchDatas(`recipebook/recipe/Search/area?area=${Place.place},pageNumber=${1},pageSize=${5}`);
       setItems(data.meals);
     }
     getApiResult();

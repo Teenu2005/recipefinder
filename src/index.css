@@ -1,3 +1,7 @@
+*{
+    scrollbar-width: none;
+}
+
 /* Nav component css */
 .nav-link,.navbar-brand{
     color: var(--txt-color) !important;
@@ -100,6 +104,9 @@ input{
   border-radius: 1em;
 }
 @media only screen and (max-width: 600px) {
+.favourite_list_item{
+    overflow: hidden;
+}
 .searchcont{
     align-items: center;
     height: 70vh;
@@ -297,14 +304,16 @@ footer{
 
 /* Favouritelist */
 .favourite_list_cont{
-    display: flex;
     background:var(--bg-gradient-cat);
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
 }
 .favourite_list_cont h2{
-    flex-basis: 100%;
+    text-align: center;
+}
+.fav_holder{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 .favourite_list_item{
     position: relative;
@@ -323,7 +332,7 @@ footer{
     max-height:100%;
 }
 .favourite_dish_detail{
-    width: 50%;
+    width: 46%;
 }
 
 .favourite_dish_detail p{

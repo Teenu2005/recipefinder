@@ -138,7 +138,7 @@ main h5{
     margin-block: 10px;
     background:var(--card-bg);
     border-radius: 1em;
-    aspect-ratio: 3/3;
+    aspect-ratio: 3/3.2;
 }
 .card:hover{
     box-shadow: 1px 1px 10px var(--bx-xh);
@@ -155,7 +155,8 @@ main h5{
 }
 .card .card-img{
     position: absolute;
-    top: 10%;
+    top: 0;
+    height: 90%;
 }
 
 .card:hover{
@@ -355,6 +356,14 @@ svg{
     background:var(--bg-btn-hover-gradient) !important;
 
 }
-.about_form h3{
+[alt="Profile"]{
+    border-radius: 50%;
+    width: 2em;
+    height: 1.6em;
+    padding: 0 !important;
+}
 
+/* loading design */
+.loading{
+    margin: 20% 40%;
 }

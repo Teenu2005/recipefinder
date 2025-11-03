@@ -36,6 +36,9 @@ function RecipeNav() {
       console.log(data.items)
       if (data && data.items) setItemList(data.items);
     }
+    else{
+      setItemList([]);
+    }
   }
   getResult();
   },

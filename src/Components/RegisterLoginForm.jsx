@@ -77,7 +77,8 @@ export default function AuthForm() {
         if (res && res.token) {
           localStorage.setItem("token", res.token); //  save token
           setMessage(" Login successful! Token saved.");
-          nav('/')  
+          nav('/');
+          window.location.reload();
         } else {
           setMessage(" Login failed: " + (res.error || "Invalid credentials"));
         }

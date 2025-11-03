@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Card, Spinner, Button, Form, Alert } from 'react-bootstrap';
 import { fetchDatasAuth, putDataAuth, uploadImage } from '../service/Api';
 import imgPlaceholder from '../assets/profile.png';
-
+import { useNavigate } from 'react-router-dom';
 function Profile() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [editMode, setEditMode] = useState(false);
+  const nav = useNavigate();
   const [form, setForm] = useState({
     username: '',
     email: '',
@@ -138,10 +139,16 @@ function Profile() {
       setError(err.message || "Failed to update profile");
     }
   };
-
+  //Function to logout
+  function logout(){
+    localStorage.removeItem('token');
+    nav("/");
+    window.location.reload();
+  }
   return (
     <>
     <div className="profile-container" style={{ maxWidth: '500px', margin: '2rem auto' }}>
+      <div className="logout"><button onClick={logout}>logout</button></div>
       <Card>
         <Card.Body>
           <div style={{ textAlign: 'center' }}>

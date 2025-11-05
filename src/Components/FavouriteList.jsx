@@ -42,7 +42,7 @@ function FavouriteList() {
 
   //  Remove favourite 
   const handleRemoveFavourite = async (recipeId) => {
-    const response = await deleteDataAuth(`/recipebookUser/fav/${recipeId}`);
+    const response = await deleteDataAuth(`/recipebook/User/fav/${recipeId}`);
     if (response.success) {
      
       setMeals(prev => prev.filter(meal => meal.recipeId !== recipeId));

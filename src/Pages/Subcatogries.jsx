@@ -14,7 +14,7 @@ function Subcatogries() {
   const categorie = useParams();
   const pageSize = 12;
 
-  // ✅ Fetch category items
+  // Fetch category items
   useEffect(() => {
     async function getApiResult() {
       setLoading(true);
@@ -38,7 +38,7 @@ function Subcatogries() {
     getApiResult();
   }, [categorie.id, page]);
 
-  // ✅ Fetch user's favourite list once
+  //  Fetch user's favourite list once
   useEffect(() => {
     async function getFavourites() {
       try {
@@ -53,7 +53,7 @@ function Subcatogries() {
     getFavourites();
   }, []);
 
-  // ✅ Handle Like/Unlike click
+  //  Handle Like/Unlike click
   const markLike = async (e) => {
     const dishId = parseInt(e.currentTarget.id);
     const isLiked = likedList.includes(dishId);
@@ -65,11 +65,11 @@ function Subcatogries() {
 
     try {
       if (isLiked) {
-        // 🔹 Remove favourite
-        await deleteDataAuth(`/recipebookUser/fav/${dishId}`);
+        //  Remove favourite
+        await deleteDataAuth(`/recipebook/User/fav/${dishId}`);
       } else {
-        // 🔹 Add favourite
-        await postDataAuth(`/recipebookUser/fav/${dishId}`, {});
+        //  Add favourite
+        await postDataAuth(`/recipebook/User/fav/${dishId}`, {});
       }
     } catch (error) {
       console.error("Error updating favourite:", error);

@@ -1,5 +1,7 @@
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
+
+//This Helper function is for fetcing data from api Without JWT token
 export async function fetchDatas(endpoint) {
   try {
     // get the endpoin url from each component based on its requirement
@@ -12,6 +14,8 @@ export async function fetchDatas(endpoint) {
     return null;
   }
 }
+
+//This Helper function is for fetcing data from api With JWT token
 export async function fetchDatasAuth(endpoint) {
   try {
     const token = localStorage.getItem("token"); // Get saved JWT
@@ -52,7 +56,7 @@ async function postData(endpoint, body, isFormData = false) {
   }
 }
 
-
+//This Helper function is for Delete Method With Auth(JWT)
 export async function deleteDataAuth(endpoint) {
   try {
     const token = localStorage.getItem("token");
@@ -77,6 +81,7 @@ export async function deleteDataAuth(endpoint) {
   }
 }
 
+//This Helper Function is for Post With Auth
 export async function postDataAuth(endpoint, body) {
   try {
     const token = localStorage.getItem("token"); // Get saved JWT
@@ -130,7 +135,7 @@ export async function loginUser(body) {
   return await postData("/recipebook/User/Auth/login", body);
 }
 
-//Put method
+//Put method with Auth
 // Api.js
 
 export const putDataAuth = async (endpoint, body) => {

@@ -395,3 +395,59 @@ button p{
     color: white;
     fill: white;
 }
+
+/* Profile  */
+.profile-page {
+  padding: 2rem;
+}
+
+.profile-card {
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 10px;
+}
+
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.recipe-card {
+  transition: transform 0.2s ease;
+}
+
+.recipe-card:hover {
+  transform: scale(1.02);
+}
+
+.recipe-img {
+  height: 180px;
+  object-fit: cover;
+}
+
+.recipe-text {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+@media (max-width: 768px) {
+  .profile-left {
+    margin-bottom: 1.5rem;
+  }
+
+  .profile-page {
+    padding: 1rem;
+  }
+
+  .recipe-img {
+    height: 150px;
+  }
+}
+
+.edit-profile-container {
+  max-width: 600px;
+  margin: 2rem auto;
+}
+

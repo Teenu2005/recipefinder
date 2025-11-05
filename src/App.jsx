@@ -11,6 +11,9 @@ import RegisterLoginForm from './Components/RegisterLoginForm'
 import Footer from './Pages/Footer'
 import Nativedish from './Components/Nativedish'
 import Profile from './Components/Profile'
+import EditProfile from './Components/EditProfile'
+// import PostRecipeForm from './Components/PostRecipeForm'
+// import PutRecipeForm from './Components/PutRecipeForm'
 // Context
 import { FavListProvider } from './Context/FavouriteContect'
 import FavouriteList from './Components/FavouriteList'
@@ -34,6 +37,9 @@ function App() {
         <Route path="/Aihelper/:id" element={<Aihelper />} />
         <Route path="/login" element={<RegisterLoginForm />} />
         <Route path='/profile' element={<Profile/>}/>
+        <Route path='/editprofile' element={<EditProfile />}/>
+        {/* <Route path='user/post' element={<PostRecipeForm />} /> */}
+        {/* <Route path='user/update' element={<PutRecipeForm />} /> */}
         <Route path="/fav" element={<FavListProvider><FavouriteList /></FavListProvider>} />
       </Routes>
       <Footer />

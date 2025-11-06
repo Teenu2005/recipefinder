@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, Spinner, Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import {fetchDatas} from '../service/Api'
+import {fetchDatas} from '../../service/Api'
 
 export default function Aihelper() {
   const { id } = useParams(); 
@@ -17,7 +17,7 @@ export default function Aihelper() {
     setResponse("");
 
     try {
-      const endpoint = `/api/recipebook/Ai/ask?id=${id}&lang=${language}`;
+      const endpoint = `Recipes/askAi?id=${id}&lang=${language}`;
       const data = await fetchDatas(endpoint);
 
       if (data && data.aiResponce) {

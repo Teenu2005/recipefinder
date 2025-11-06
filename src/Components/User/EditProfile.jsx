@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Form, Button, Spinner, Alert, Card } from "react-bootstrap";
-import { fetchDatasAuth, putDataAuth, uploadImage } from "../service/Api";
+import { fetchDatasAuth, putDataAuth, uploadImage } from "../../service/Api";
 
 function EditProfile() {
   const [form, setForm] = useState({

@@ -12,7 +12,7 @@ function Categories() {
     async function get() {
       try {
         // Use your API endpoint
-        const data = await fetchDatas(`/recipeBook/Category/getCategories`);
+        const data = await fetchDatas(`recipe/Search/getCategories`);
         setCategories(data);
         
       } catch (error) {

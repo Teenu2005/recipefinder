@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { registerUser, loginUser, uploadImage } from "../service/Api";
+import { registerUser, loginUser, uploadImage } from "../../service/Api";
 import { useNavigate } from 'react-router-dom';
 
 

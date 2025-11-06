@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card, Spinner, Button, Alert, Row, Col } from "react-bootstrap";
-import { fetchDatasAuth, deleteDataAuth } from "../service/Api";
-import imgPlaceholder from "../assets/profile.png";
+import { fetchDatasAuth, deleteDataAuth,postDataAuth } from "../../service/Api";
+import imgPlaceholder from "../../assets/profile.png";
 import { useNavigate } from "react-router-dom";
 
 function Profile() {
@@ -15,8 +15,9 @@ function Profile() {
   useEffect(() => {
     async function loadProfile() {
       try {
-        const userData = await fetchDatasAuth("/recipebook/User");
-        const userPosts = await fetchDatasAuth("/api/recipebook/User/posted");
+        const userData = await fetchDatasAuth("User");
+        const userPosts = await fetchDatasAuth("User/posted");
+        console.log(userData,"midle\n",userPosts)
         if (userData) setUser(userData);
         if (userPosts) setRecipes(userPosts);
       } catch (err) {
@@ -64,7 +65,7 @@ function Profile() {
   return (
     <div className="container-fluid profile-page">
       <Row>
-        {/* Profile Section (30%) */}
+        {/* Profile Section*/}
         <Col md={4} className="profile-left mb-4">
           <Card className="profile-card shadow-sm">
             <Card.Body className="text-center">
@@ -85,7 +86,7 @@ function Profile() {
           </Card>
         </Col>
 
-        {/* Recipes Section (70%) */}
+        {/* Recipes Section */}
         <Col md={8} className="recipes-right">
           <h3 className="mb-3">Your Posted Recipes</h3>
           {recipes.length === 0 ? (

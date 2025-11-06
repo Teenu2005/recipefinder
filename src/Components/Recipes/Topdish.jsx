@@ -1,38 +1,38 @@
-import { React, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Container, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { FaChevronRight } from "react-icons/fa";
-import { fetchDatas } from '../service/Api';
+import { fetchDatas } from '../../service/Api';
 
-function Dishgrid({ Place }) {
-  const [recipes, setRecipes] = useState([]);
+function Topdish({ Place }) {
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const nav = useNavigate();
 
   useEffect(() => {
     async function getApiResult() {
+      setLoading(true);
       try {
-        const pageNumber = 1;
-        const pageSize = 5; // show 5 recipes in the grid
-        const data = await fetchDatas(`/recipeBook/recipe/Search/area?area=${Place}&pageNumber=${pageNumber}&pageSize=${pageSize}`);
-        setRecipes(data.items || []);
+        // Fetch top 5 recipes from paginated API
+        const data = await fetchDatas(`recipe/Search/area?area=${Place}&pageNumber=1&pageSize=5`);
+        setCategories(data.items || []);
       } catch (error) {
-        console.error("Error fetching recipes:", error);
+        console.error("Error fetching top dishes:", error);
       } finally {
         setLoading(false);
       }
     }
+
     getApiResult();
   }, [Place]);
 
-  // Navigate to recipe detail page
+  if (loading) return <Spinner animation="border" variant="primary" />;
+
+  if (!categories.length) return <p>No recipes found for {Place}.</p>;
+
   function goToRecipe(id) {
     nav(`/item/${id}`);
   }
-
-  if (loading) return <Spinner animation="border" variant="primary" />;
-
-  if (!recipes.length) return <p>No recipes found for {Place}.</p>;
 
   return (
     <Container fluid className='home_component_top'>
@@ -40,14 +40,17 @@ function Dishgrid({ Place }) {
         <h3>{Place}</h3>
         <a href={`/native/${Place}`}><FaChevronRight /></a>
       </div>
-
-      <Container id='grid_contanier' fluid>
-        {recipes.map((recipe, index) => (
-          <div key={recipe.recipeId} onClick={() => goToRecipe(recipe.recipeId)} className={`grid_child_${index+1}`}>
+      <Container fluid className='home_component'>
+        {categories.map((recipe) => (
+          <div 
+            key={recipe.recipeId} 
+            className='home_component_div' 
+            onClick={() => goToRecipe(recipe.recipeId)}
+          >
             <Card.Img 
               src={recipe.imageUrl || 'https://via.placeholder.com/150'} 
               className='home_component_img' 
-              alt={recipe.name} 
+              alt={recipe.name}
             />
             <h3 className='home_component_head'>{recipe.name}</h3>
           </div>
@@ -57,4 +60,4 @@ function Dishgrid({ Place }) {
   );
 }
 
-export default Dishgrid;
+export default Topdish;

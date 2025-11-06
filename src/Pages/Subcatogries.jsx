@@ -19,7 +19,7 @@ function Subcatogries() {
     async function getApiResult() {
       setLoading(true);
       try {
-        const url = `/recipeBook/recipe/Search/category?category=${categorie.id}&pageNumber=${page}&pageSize=${pageSize}`;
+        const url = `recipe/Search/category?category=${categorie.id}&pageNumber=${page}&pageSize=${pageSize}`;
         const data = await fetchDatas(url);
 
         if (data && data.items) {
@@ -42,7 +42,7 @@ function Subcatogries() {
   useEffect(() => {
     async function getFavourites() {
       try {
-        const favResponse = await fetchDatasAuth('/recipebookUser/fav');
+        const favResponse = await fetchDatasAuth('User/fav');
         if (favResponse?.responce?.favList) {
           setLikedList(favResponse.responce.favList.map(id => parseInt(id)));
         }
@@ -66,10 +66,10 @@ function Subcatogries() {
     try {
       if (isLiked) {
         //  Remove favourite
-        await deleteDataAuth(`/recipebook/User/fav/${dishId}`);
+        await deleteDataAuth(`User/fav/${dishId}`);
       } else {
         //  Add favourite
-        await postDataAuth(`/recipebook/User/fav/${dishId}`, {});
+        await postDataAuth(`User/fav/${dishId}`, {});
       }
     } catch (error) {
       console.error("Error updating favourite:", error);

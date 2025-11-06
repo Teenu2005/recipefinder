@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Container, Row, Col, ProgressBar, Spinner, Alert } from "react-bootstrap";
-import { fetchDatasAuth, putDataAuth } from "../service/Api"; // adjust path
-import { BASE_URL } from "../service/Api";
+import { fetchDatasAuth, putDataAuth } from "../../service/Api"; // adjust path
+import { BASE_URL } from "../../service/Api";
 
 const PutRecipeForm = ({ recipeId }) => {
   const [step, setStep] = useState(1);

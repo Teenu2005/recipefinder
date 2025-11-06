@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TiHeartFullOutline } from "react-icons/ti";
-import { fetchDatasAuth, postDataAuth, deleteDataAuth } from '../service/Api';
+import { fetchDatasAuth, postDataAuth, deleteDataAuth } from '../../service/Api';
 
 function FavouriteList() {
   const [meals, setMeals] = useState([]);
@@ -13,7 +13,7 @@ function FavouriteList() {
 
   const fetchFavMeals = async () => {
     try {
-      const favResponse = await fetchDatasAuth('/recipebook/User/fav');
+      const favResponse = await fetchDatasAuth('User/fav');
       
       if (favResponse.Message === "No favourites found.") {
         setMessage("You have not liked any meal.");
@@ -30,7 +30,7 @@ function FavouriteList() {
         return;
       }
 
-      const mealDetailsResponse = await postDataAuth('/recipebook/recipe/Search/list', favList);
+      const mealDetailsResponse = await postDataAuth('recipe/Search/list', favList);
       setMeals(mealDetailsResponse.items || []);
       setLoading(false);
     } catch (error) {
@@ -42,7 +42,7 @@ function FavouriteList() {
 
   //  Remove favourite 
   const handleRemoveFavourite = async (recipeId) => {
-    const response = await deleteDataAuth(`/recipebook/User/fav/${recipeId}`);
+    const response = await deleteDataAuth(`User/fav/${recipeId}`);
     if (response.success) {
      
       setMeals(prev => prev.filter(meal => meal.recipeId !== recipeId));

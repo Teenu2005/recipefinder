@@ -1,7 +1,7 @@
 import img from '../assets/cookimg.png'
-import Topdish from '../Components/Topdish'
+import Topdish from '../Components/Recipes/Topdish'
 import About from './About'
-import Dishgrid from '../Components/Dishgrid'
+import Dishgrid from '../Components/Recipes/Dishgrid'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import {  fetchDatas } from '../service/Api'
@@ -13,7 +13,7 @@ function Home() {
   useEffect(()=>{
     // async function to get the result from api using fetchData function declared in aip.js in service folder
     async function getApiResult(){
-      const data = await fetchDatas(`/recipeBook/recipe/Filter/random`);
+      const data = await fetchDatas(`recipe/Search/random`);
       setRandom(data[0].recipeId);
     }
     getApiResult();

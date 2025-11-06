@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Container, Spinner } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom";
-import img from '../assets/Ai_png.png';
-import { fetchDatas } from '../service/Api';
+import img from '../../assets/Ai_png.png';
+import { fetchDatas } from '../../service/Api';
 
 export default function Detail() {
   const [item, setItem] = useState(null);
@@ -13,7 +13,7 @@ export default function Detail() {
   useEffect(() => {
     async function getApiResult() {
       try {
-        const data = await fetchDatas(`/recipeBook/recipe/Search/${id}`);
+        const data = await fetchDatas(`recipe/Search/${id}`);
         setItem(data); // directly set the response
       } catch (error) {
         console.error("Error fetching recipe:", error);

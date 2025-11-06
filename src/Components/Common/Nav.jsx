@@ -4,9 +4,9 @@ import { FaSearch } from "react-icons/fa";
 import { FaRegSun, FaMoon } from "react-icons/fa6";
 import { IoIosArrowDown } from "react-icons/io";
 import { useNavigate, NavLink } from 'react-router-dom';
-import iconImg from '../assets/Icon.png'
-import { fetchDatas } from '../service/Api';
-import profile from '../assets/profile.png'
+import iconImg from '../../assets/Icon.png'
+import { fetchDatas } from '../../service/Api';
+import profile from '../../assets/profile.png'
 function RecipeNav() {
   const nav = useNavigate();
   const [showSearch, setShowSearch] = useState(false);
@@ -32,7 +32,7 @@ function RecipeNav() {
   useEffect(()=>{
     async function getResult(){
     if(searchValue.length > 3){
-      const data = await fetchDatas(`/recipebook/recipe/Search?searchQuery=${searchValue}`);
+      const data = await fetchDatas(`recipe/Search/byQuery​?searchQuery=${searchValue}`);
       console.log(data.items)
       if (data && data.items) setItemList(data.items);
     }

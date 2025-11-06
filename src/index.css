@@ -396,58 +396,251 @@ button p{
     fill: white;
 }
 
-/* Profile  */
+
+/* 
+   PROFILE PAGE LAYOUT FIX
+ */
+
 .profile-page {
-  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 30px 15px;
 }
 
-.profile-card {
-  text-align: center;
-  padding: 1.5rem;
+/* Use Bootstrap Row alignment fix */
+.profile-page .row {
+  align-items: flex-start;
+}
+
+/* Left Section - Profile */
+.profile_detail_contanier {
   border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  padding: 25px 15px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: sticky;
+  top: 20px;
 }
 
-.profile-img {
+.profile_detail_contanier:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.profile_img {
   width: 120px;
   height: 120px;
-  border-radius: 50%;
   object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 15px;
 }
 
+.profile_detail_contanier h4 {
+  font-size: 1.25rem;
+  margin-bottom: 5px;
+}
+
+.profile_detail_contanier p {
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+
+.profile_detail_contanier button {
+  font-size: 0.9rem;
+  padding: 8px 15px;
+}
+
+/* 
+   USER RECIPES SECTION
+ */
+
+.recipes-right {
+  background: transparent;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Scrollable recipe list area */
+.recipes-scroll {
+  overflow-y: auto;
+  max-height: calc(100vh - 150px);
+  padding-right: 10px;
+}
+
+/* Recipe Card Styling */
 .recipe-card {
-  transition: transform 0.2s ease;
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .recipe-card:hover {
-  transform: scale(1.02);
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
 .recipe-img {
-  height: 180px;
+  height: 200px;
   object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .recipe-text {
   font-size: 0.9rem;
-  color: #555;
+  min-height: 60px;
+}
+
+/* Pagination */
+.pagination {
+  margin-top: 25px;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.pagination .page-link {
+  color: #007bff;
+}
+
+/* 
+   RESPONSIVE DESIGN
+ */
+
+@media (max-width: 991px) {
+  .profile-page {
+    padding: 20px;
+  }
+
+  .profile_detail_contanier {
+    position: relative;
+    top: auto;
+    margin-bottom: 25px;
+  }
+
+  .recipes-scroll {
+    max-height: none;
+  }
 }
 
 @media (max-width: 768px) {
-  .profile-left {
-    margin-bottom: 1.5rem;
-  }
-
-  .profile-page {
-    padding: 1rem;
+  .profile_img {
+    width: 100px;
+    height: 100px;
   }
 
   .recipe-img {
-    height: 150px;
+    height: 180px;
+  }
+
+  .recipe-text {
+    min-height: auto;
   }
 }
 
-.edit-profile-container {
-  max-width: 600px;
-  margin: 2rem auto;
+@media (max-width: 576px) {
+  .profile-page {
+    padding: 15px;
+  }
+
+  .recipe-img {
+    height: 160px;
+  }
+
+  .profile_detail_contanier h4 {
+    font-size: 1.1rem;
+  }
+
+  .profile_detail_contanier p {
+    font-size: 0.85rem;
+  }
 }
 
+
+/* 
+   USER RECIPES STYLING
+ */
+
+.user-recipes-section {
+  background: transparent;
+  min-height: 100%;
+}
+
+.recipe-card {
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.recipe-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.recipe-img {
+  height: 220px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.recipe-text {
+  font-size: 0.9rem;
+  min-height: 60px;
+}
+
+.empty-recipes {
+  font-size: 1rem;
+}
+
+/* Pagination */
+.pagination {
+  margin-top: 25px;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.pagination .page-link {
+  color: #007bff;
+}
+
+/* Responsive Fix */
+@media (max-width: 768px) {
+  .recipe-img {
+    height: 180px;
+  }
+
+  .recipe-text {
+    min-height: auto;
+  }
+}
+
+/* edit profile css */
+.edit-profile-container {
+  max-width: 600px;
+  margin: 40px auto;
+}
+
+.edit-profile-container h3 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.edit-profile-container form {
+  margin-top: 15px;
+}
+
+.edit-profile-container .btn {
+  min-width: 120px;
+}

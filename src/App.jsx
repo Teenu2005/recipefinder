@@ -10,7 +10,7 @@ import Detail from './Components/Recipes/Detail'
 import RegisterLoginForm from './Components/User/RegisterLoginForm'
 import Footer from './Pages/Footer'
 import Nativedish from './Components/Recipes/Nativedish'
-import Profile from './Components/User/Profile'
+import Profile from './Pages/Profile'
 import EditProfile from './Components/User/EditProfile'
 // import PostRecipeForm from './Components/PostRecipeForm'
 // import PutRecipeForm from './Components/PutRecipeForm'
@@ -33,7 +33,7 @@ function App() {
         <Route path="/Aihelper/:id" element={<Aihelper />} />
         <Route path="/login" element={<RegisterLoginForm />} />
         <Route path='/profile' element={<Profile/>}/>
-        <Route path='/editprofile' element={<EditProfile />}/>
+        <Route path='/editprofile/:id' element={<EditProfile />}/>
         {/* <Route path='user/post' element={<PostRecipeForm />} /> */}
         {/* <Route path='user/update' element={<PutRecipeForm />} /> */}
         <Route path="/fav" element={<FavouriteList />} />
